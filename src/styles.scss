@@ -13,9 +13,23 @@
 // hue. Available color palettes: https://material.io/design/color/
 $GangaEmployeeMaintenance-primary: mat-palette($mat-indigo);
 $GangaEmployeeMaintenance-accent: mat-palette($mat-pink, A200, A100, A400);
-
 // The warn palette is optional (defaults to red).
 $GangaEmployeeMaintenance-warn: mat-palette($mat-red);
+
+// Define an alternate dark theme.
+$GangaEmployeeMaintenance-dark-primary: mat-palette($mat-blue-grey);
+$GangaEmployeeMaintenance-dark-accent: mat-palette(
+  $mat-amber,
+  A200,
+  A100,
+  A400
+);
+$GangaEmployeeMaintenance-dark-warn: mat-palette($mat-deep-orange);
+$GangaEmployeeMaintenance-dark-theme: mat-dark-theme(
+  $GangaEmployeeMaintenance-dark-primary,
+  $GangaEmployeeMaintenance-dark-accent,
+  $GangaEmployeeMaintenance-dark-warn
+);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $GangaEmployeeMaintenance-theme: mat-light-theme(
@@ -28,6 +42,10 @@ $GangaEmployeeMaintenance-theme: mat-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($GangaEmployeeMaintenance-theme);
+
+.GangaEmployeeMaintenance-dark-theme {
+  @include angular-material-theme($GangaEmployeeMaintenance-dark-theme);
+}
 
 /* You can add global styles to this file, and also import other style files */
 
