@@ -1,7 +1,43 @@
-mat-toolbar {
-  position: fixed;
-  z-index: 2;
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
-.spacer {
-  flex: 1 1 auto;
+.maincontainer {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  height: 100%;
+
+  .header {
+    mat-toolbar {
+    }
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
+  .content {
+    display: grid;
+    grid-template-columns: auto;
+    height: 100%;
+
+    .sidenav-container {
+      height: 100%;
+    }
+
+    .sidenav {
+      background-color: red;
+      padding: 20px;
+    }
+
+    .sidenav-content {
+      display: grid;
+      grid-template-columns: auto;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+  .footer {
+    height: 30px;
+  }
 }
