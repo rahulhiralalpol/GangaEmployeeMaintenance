@@ -1,13 +1,13 @@
 <div class="maincontainer">
   <div class="header">
     <mat-toolbar color="primary" mat-elevation-z8>
-      <span>Employee Maintenance</span>
+      <button mat-icon-button aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img class="logo" src="assets/Ganga.svg" />
+      <span class="appname">Employee Maintenance</span>
       <span class="spacer"></span>
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu"
-      >
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>color_lens</mat-icon>
       </button>
       <mat-menu #menu="matMenu">

@@ -1,43 +1,48 @@
 :host {
+  height: 100%;
+  overflow: hidden;
+}
+.maincontainer {
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-.maincontainer {
-  display: grid;
-  grid-template-rows: min-content auto min-content;
-  height: 100%;
-
   .header {
     mat-toolbar {
-    }
-    .spacer {
-      flex: 1 1 auto;
+      position: relative;
+      .logo {
+        padding: 0px 10px;
+      }
+      .appname {
+        padding: 0px 10px;
+        font-size: 1.35em;
+        font-weight: 200;
+      }
+      .spacer {
+        flex: 1 1 auto;
+      }
     }
   }
   .content {
-    display: grid;
-    grid-template-columns: auto;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
 
     .sidenav-container {
-      height: 100%;
+      background-color: yellow;
     }
-
     .sidenav {
       background-color: red;
       padding: 20px;
     }
-
     .sidenav-content {
-      display: grid;
-      grid-template-columns: auto;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
+      padding: 20px;
+      background-color: yellow;
     }
   }
   .footer {
-    height: 30px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    color: wheat;
   }
 }
