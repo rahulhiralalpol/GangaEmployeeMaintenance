@@ -1,5 +1,9 @@
 <mat-toolbar color="primary" mat-elevation-z8>
-  <button mat-icon-button aria-label="Example icon-button with a menu">
+  <button
+    mat-icon-button
+    aria-label="Example icon-button with a menu"
+    (click)="toggleSidebar()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <img class="logo" src="assets/Ganga.svg" />
