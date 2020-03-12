@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-sidebar",
@@ -6,8 +7,16 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./sidebar.component.scss"]
 })
 export class SidebarComponent implements OnInit {
-  showFiller = false;
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(private router: Router) { }
+
+  ngOnInit(): void { }
+
+  openDashboard() {
+    this.router.navigate(["/dashboard"]);
+  }
+
+  openEmployees() {
+    this.router.navigate(["/employeeslist"]);
+  }
 }
