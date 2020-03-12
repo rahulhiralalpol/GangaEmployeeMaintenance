@@ -10,9 +10,12 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { HeaderComponent } from "./shared/header/header.component";
+import { FooterComponent } from "./shared/footer/footer.component";
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, SidebarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,4 +30,4 @@ import { MatSidenavModule } from "@angular/material/sidenav";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

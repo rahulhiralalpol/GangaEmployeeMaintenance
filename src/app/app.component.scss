@@ -6,22 +6,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  .header {
-    mat-toolbar {
-      position: relative;
-      .logo {
-        padding: 0px 10px;
-      }
-      .appname {
-        padding: 0px 10px;
-        font-size: 1.35em;
-        font-weight: 200;
-      }
-      .spacer {
-        flex: 1 1 auto;
-      }
-    }
-  }
+
   .content {
     display: flex;
     flex-direction: column;
@@ -32,18 +17,9 @@
       flex: 1;
       // background-color: yellow;
     }
-    .sidenav {
-      padding: 20px;
-    }
     .sidenav-content {
       padding: 20px;
       // background-color: blue;
     }
-  }
-  .footer {
-    padding: 10px;
-    background-color: #3f51b5;
-    color: white;
-    font-weight: 100;
   }
 }
