@@ -7,6 +7,7 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   sidebarOpen = true;
+  MyThemeClass = "GangaDarkTheme1";
 
   sidebarToggler($event) {
     this.sidebarOpen = !this.sidebarOpen;
