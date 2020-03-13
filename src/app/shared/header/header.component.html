@@ -20,14 +20,17 @@
     <mat-nav-list mat-list-item>
       <h4 matSubheader>Light Themes</h4>
     </mat-nav-list>
-    <button mat-raised-button color="primary">AV</button>
     <button mat-menu-item (click)="ChangeTheme('GangaLightTheme1')">
       <mat-icon>color_lens</mat-icon>
       <span>Light Theme 1</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="ChangeTheme('DeepPurpleAmberLightTheme')">
       <mat-icon>color_lens</mat-icon>
       <span>Light Theme 2</span>
+    </button>
+    <button mat-menu-item (click)="ChangeTheme('IndigoPinkLightTheme')">
+      <mat-icon>color_lens</mat-icon>
+      <span>Light Theme 3</span>
     </button>
     <mat-divider></mat-divider>
     <mat-nav-list mat-list-item>
@@ -37,9 +40,13 @@
       <mat-icon>color_lens</mat-icon>
       <span>Dark Theme 1</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="ChangeTheme('PinkBlueGreyDarkTheme')">
       <mat-icon>color_lens</mat-icon>
       <span>Dark Theme 2</span>
+    </button>
+    <button mat-menu-item (click)="ChangeTheme('PurpleGreenDarkTheme')">
+      <mat-icon>color_lens</mat-icon>
+      <span>Dark Theme 3</span>
     </button>
   </mat-menu>
   <button mat-icon-button aria-label="Example icon-button with a menu">
