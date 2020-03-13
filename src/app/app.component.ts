@@ -9,6 +9,10 @@ export class AppComponent {
   sidebarOpen = true;
   MyThemeClass = "GangaDarkTheme1";
 
+  themeChanger(ChangedTheme) {
+    this.MyThemeClass = ChangedTheme;
+  }
+
   sidebarToggler($event) {
     this.sidebarOpen = !this.sidebarOpen;
   }

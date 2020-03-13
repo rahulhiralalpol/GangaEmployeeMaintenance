@@ -1,6 +1,9 @@
 <div class="maincontainer" [class]="MyThemeClass">
   <div class="header">
-    <app-header (toggleSidebarEvent)="sidebarToggler($event)"></app-header>
+    <app-header
+      (toggleSidebarEvent)="sidebarToggler($event)"
+      (themeChangedEvent)="themeChanger($event)"
+    ></app-header>
   </div>
   <div class="content">
     <mat-drawer-container class="sidenav-container" autosize>
