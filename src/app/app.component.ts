@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { OverlayContainer } from "@angular/cdk/overlay";
+import { Component, Renderer2, Inject } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 
 @Component({
   selector: "app-root",
@@ -7,8 +7,11 @@ import { OverlayContainer } from "@angular/cdk/overlay";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  constructor(private overlayContainer: OverlayContainer) {
-    overlayContainer.getContainerElement().classList.add(this.MyThemeClass);
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2
+  ) {
+    this.renderer.setAttribute(this.document.body, "class", this.MyThemeClass);
   }
 
   sidebarOpen = true;
@@ -16,9 +19,7 @@ export class AppComponent {
 
   themeChanger(ChangedTheme) {
     this.MyThemeClass = ChangedTheme;
-    this.overlayContainer
-      .getContainerElement()
-      .classList.add(this.MyThemeClass);
+    this.renderer.setAttribute(this.document.body, "class", this.MyThemeClass);
   }
 
   sidebarToggler($event) {

@@ -1,12 +1,17 @@
-<button mat-button [routerLink]="['dashboard']" routerLinkActive="activeRoute">
-  Dashboard
-</button>
-<mat-divider></mat-divider>
-<button
-  mat-button
-  [routerLink]="['employeeslist']"
-  routerLinkActive="activeRoute"
->
-  Employees
-</button>
-<mat-divider></mat-divider>
+<mat-nav-list>
+  <mat-list-item [routerLink]="['dashboard']" routerLinkActive="activeRoute">
+    <mat-icon matListIcon>folder</mat-icon>
+    <button mat-icon-button>
+      Dashboard
+    </button>
+  </mat-list-item>
+  <mat-list-item
+    [routerLink]="['employeeslist']"
+    routerLinkActive="activeRoute"
+  >
+    <mat-icon matListIcon>folder</mat-icon>
+    <button mat-icon-button>
+      Employees
+    </button>
+  </mat-list-item>
+</mat-nav-list>
