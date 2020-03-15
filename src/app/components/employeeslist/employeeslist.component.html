@@ -1,32 +1,16 @@
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
-<p>employeeslist works!</p>
+<p
+  *ngFor="
+    let employee of employees;
+    let i = index;
+    first as isFirst;
+    last as isLast;
+    odd as isOdd;
+    even as isEven
+  "
+>
+  {{ i + 1 }} / {{ employees.length }} - Employee # {{ employee }}
+  <span *ngIf="isFirst">Frist</span>
+  <span *ngIf="isLast">Last</span>
+  <span *ngIf="isOdd">Odd</span>
+  <span *ngIf="isEven">Even</span>
+</p>

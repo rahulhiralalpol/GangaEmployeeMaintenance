@@ -1,17 +1,12 @@
 <mat-nav-list>
-  <mat-list-item [routerLink]="['dashboard']" routerLinkActive="activeRoute">
-    <mat-icon matListIcon>folder</mat-icon>
-    <button mat-icon-button>
-      Dashboard
-    </button>
-  </mat-list-item>
   <mat-list-item
-    [routerLink]="['employeeslist']"
+    *ngFor="let button of buttons"
+    [routerLink]="[button.routerlink]"
     routerLinkActive="activeRoute"
   >
-    <mat-icon matListIcon>folder</mat-icon>
-    <button mat-icon-button>
-      Employees
+    <mat-icon matListIcon>{{ button.icon }}</mat-icon>
+    <button mat-icon-button style="padding-left: 10px;">
+      {{ button.name }}
     </button>
   </mat-list-item>
 </mat-nav-list>

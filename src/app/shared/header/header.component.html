@@ -1,14 +1,19 @@
 <mat-toolbar color="primary">
-  <button
-    mat-icon-button
-    aria-label="Example icon-button with a menu"
-    (click)="toggleSidebar()"
-  >
+  <!-- Menu Icon -->
+  <button mat-icon-button (click)="toggleSidebar()">
     <mat-icon>menu</mat-icon>
   </button>
+
+  <!-- Logo -->
   <img class="logo" src="assets/Ganga.svg" />
+
+  <!-- AppName -->
   <span class="appname">Employee Maintenance</span>
+
+  <!-- Spacer -->
   <span class="spacer"></span>
+
+  <!-- MenuButton -->
   <button
     mat-icon-button
     [matMenuTriggerFor]="menu"
@@ -16,40 +21,24 @@
   >
     <mat-icon>color_lens</mat-icon>
   </button>
+
+  <!-- Menu -->
   <mat-menu #menu="matMenu">
-    <mat-nav-list mat-list-item>
-      <h4 matSubheader>Light Themes</h4>
+    <mat-nav-list mat-list-item *ngFor="let theme of themes">
+      <h4 matSubheader>{{ theme.ThemeGroup }}</h4>
+      <button
+        *ngFor="let detail of theme.Details"
+        mat-menu-item
+        (click)="ChangeTheme([detail.theme])"
+      >
+        <mat-icon>color_lens</mat-icon>
+        <span>{{ detail.name }}</span>
+      </button>
     </mat-nav-list>
-    <button mat-menu-item (click)="ChangeTheme('GangaLightTheme1')">
-      <mat-icon>color_lens</mat-icon>
-      <span>Light Theme 1</span>
-    </button>
-    <button mat-menu-item (click)="ChangeTheme('DeepPurpleAmberLightTheme')">
-      <mat-icon>color_lens</mat-icon>
-      <span>Light Theme 2</span>
-    </button>
-    <button mat-menu-item (click)="ChangeTheme('IndigoPinkLightTheme')">
-      <mat-icon>color_lens</mat-icon>
-      <span>Light Theme 3</span>
-    </button>
-    <mat-divider></mat-divider>
-    <mat-nav-list mat-list-item>
-      <h4 matSubheader>Dark Themes</h4>
-    </mat-nav-list>
-    <button mat-menu-item (click)="ChangeTheme('GangaDarkTheme1')">
-      <mat-icon>color_lens</mat-icon>
-      <span>Dark Theme 1</span>
-    </button>
-    <button mat-menu-item (click)="ChangeTheme('PinkBlueGreyDarkTheme')">
-      <mat-icon>color_lens</mat-icon>
-      <span>Dark Theme 2</span>
-    </button>
-    <button mat-menu-item (click)="ChangeTheme('PurpleGreenDarkTheme')">
-      <mat-icon>color_lens</mat-icon>
-      <span>Dark Theme 3</span>
-    </button>
   </mat-menu>
-  <button mat-icon-button aria-label="Example icon-button with a menu">
+
+  <!-- User Icon -->
+  <button mat-icon-button>
     <mat-icon>account_circle</mat-icon>
   </button>
 </mat-toolbar>
