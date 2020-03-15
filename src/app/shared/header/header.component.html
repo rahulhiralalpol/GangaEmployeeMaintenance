@@ -30,6 +30,7 @@
         *ngFor="let detail of theme.Details"
         mat-menu-item
         (click)="ChangeTheme([detail.theme])"
+        [ngClass]="{ activeTheme: detail.theme == [SelectedThemeIndicator] }"
       >
         <mat-icon>color_lens</mat-icon>
         <span>{{ detail.name }}</span>
