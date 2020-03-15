@@ -15,7 +15,7 @@ export class AppComponent {
   }
 
   sidebarOpen = true;
-  MyThemeClass = "GangaDarkTheme1";
+  MyThemeClass = "GangaLightTheme1";
 
   themeChanger(ChangedTheme) {
     this.MyThemeClass = ChangedTheme;

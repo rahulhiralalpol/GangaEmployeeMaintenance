@@ -1,10 +1,7 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-// @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
-// @import "~@angular/material/prebuilt-themes/purple-green.css";
 @import "~@angular/material/theming";
 @include mat-core();
 
+//GangaLightTheme1
 $GangaLight1-primary: mat-palette($mat-blue-gray, 700, 600, 900);
 $GangaLight1-accent: mat-palette($mat-cyan);
 $GangaLight1-warn: mat-palette($mat-red);
@@ -14,6 +11,27 @@ $GangaLight1-theme: mat-light-theme(
   $GangaLight1-warn
 );
 
+//GangaLightTheme2
+$GangaLight2-primary: mat-palette($mat-deep-purple);
+$GangaLight2-accent: mat-palette($mat-amber);
+$GangaLight2-warn: mat-palette($mat-red);
+$GangaLight2-theme: mat-light-theme(
+  $GangaLight2-primary,
+  $GangaLight2-accent,
+  $GangaLight2-warn
+);
+
+//GangaLightTheme3
+$GangaLight3-primary: mat-palette($mat-indigo);
+$GangaLight3-accent: mat-palette($mat-pink);
+$GangaLight3-warn: mat-palette($mat-red);
+$GangaLight3-theme: mat-light-theme(
+  $GangaLight3-primary,
+  $GangaLight3-accent,
+  $GangaLight3-warn
+);
+
+//GangaDarkTheme1
 $GangaDark1-primary: mat-palette($mat-grey, 800, 600, 900);
 $GangaDark1-accent: mat-palette($mat-amber);
 $GangaDark1-warn: mat-palette($mat-deep-orange);
@@ -23,23 +41,43 @@ $GangaDark1-theme: mat-dark-theme(
   $GangaDark1-warn
 );
 
+//GangaDarkTheme2
+$GangaDark2-primary: mat-palette($mat-pink);
+$GangaDark2-accent: mat-palette($mat-blue-gray);
+$GangaDark2-warn: mat-palette($mat-deep-orange);
+$GangaDark2-theme: mat-dark-theme(
+  $GangaDark2-primary,
+  $GangaDark2-accent,
+  $GangaDark2-warn
+);
+
+//GangaDarkTheme3
+$GangaDark3-primary: mat-palette($mat-purple);
+$GangaDark3-accent: mat-palette($mat-green);
+$GangaDark3-warn: mat-palette($mat-deep-orange);
+$GangaDark3-theme: mat-dark-theme(
+  $GangaDark3-primary,
+  $GangaDark3-accent,
+  $GangaDark3-warn
+);
+
 .GangaLightTheme1 {
   @include angular-material-theme($GangaLight1-theme);
+}
+.DeepPurpleAmberLightTheme {
+  @include angular-material-theme($GangaLight2-theme);
+}
+.IndigoPinkLightTheme {
+  @include angular-material-theme($GangaLight3-theme);
 }
 .GangaDarkTheme1 {
   @include angular-material-theme($GangaDark1-theme);
 }
-.DeepPurpleAmberLightTheme {
-  @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
-}
-.IndigoPinkLightTheme {
-  @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-}
 .PinkBlueGreyDarkTheme {
-  @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+  @include angular-material-theme($GangaDark2-theme);
 }
 .PurpleGreenDarkTheme {
-  @import "~@angular/material/prebuilt-themes/purple-green.css";
+  @include angular-material-theme($GangaDark3-theme);
 }
 
 html,
