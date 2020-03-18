@@ -14,17 +14,17 @@ export class HeaderComponent implements OnInit {
     {
       ThemeGroup: "Light Themes",
       Details: [
-        { name: "Light Theme 1", theme: "GangaLightTheme1" },
-        { name: "Light Theme 2", theme: "DeepPurpleAmberLightTheme" },
-        { name: "Light Theme 3", theme: "IndigoPinkLightTheme" }
+        { name: "BlueGrey Cyan", theme: "GangaLightTheme1" },
+        { name: "DeepPurple Amber", theme: "DeepPurpleAmberLightTheme" },
+        { name: "Indigo Pink", theme: "IndigoPinkLightTheme" }
       ]
     },
     {
       ThemeGroup: "Dark Themes",
       Details: [
-        { name: "Dark Theme 1", theme: "GangaDarkTheme1" },
-        { name: "Dark Theme 2", theme: "PinkBlueGreyDarkTheme" },
-        { name: "Dark Theme 3", theme: "PurpleGreenDarkTheme" }
+        { name: "Dark Grey", theme: "GangaDarkTheme1" },
+        { name: "Pink Blue", theme: "PinkBlueGreyDarkTheme" },
+        { name: "Purple Green", theme: "PurpleGreenDarkTheme" }
       ]
     }
   ];
