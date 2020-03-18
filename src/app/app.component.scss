@@ -1,10 +1,9 @@
 :host {
-  height: 100%;
   overflow: hidden;
 }
 .maincontainer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: min-content auto min-content;
   height: 100%;
 
   .header {
@@ -13,24 +12,28 @@
   }
 
   .content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow-y: auto;
+    display: grid;
+    grid-template-rows: auto;
+    overflow: hidden;
+    place-items: stretch stretch;
 
     .sidenav-container {
-      flex: 1;
-      // background-color: yellow;
-    }
+      display: grid;
+      overflow: hidden;
+      place-items: stretch stretch;
 
-    .sidenav {
-      width: 220px;
-      border-style: none;
-      z-index: 2;
-      box-shadow: 5px 0px 8px rgba($color: #000000, $alpha: 0.15);
-    }
-    .sidenav-content {
-      // background-color: blue;
+      .sidenav {
+        width: 220px;
+        border-style: none;
+        z-index: 2;
+        box-shadow: 5px 0px 8px rgba($color: #000000, $alpha: 0.3);
+      }
+
+      .sidenav-content {
+        overflow-y: hidden;
+        // background-color: olive;
+        place-self: center stretch;
+      }
     }
   }
 

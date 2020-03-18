@@ -16,7 +16,6 @@ export class SidebarComponent implements OnInit {
   buttons: SidebarButton[] = [
     { name: "Dashboard", routerlink: "dashboard", icon: "account_circle" },
     { name: "Employees", routerlink: "employeeslist", icon: "menu" }
-    // { name: "Employee Details", routerlink: "a", icon: "face" }
   ];
 
   ngOnInit(): void {}
