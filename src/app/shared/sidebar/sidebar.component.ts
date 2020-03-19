@@ -14,8 +14,9 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) {}
 
   buttons: SidebarButton[] = [
-    { name: "Dashboard", routerlink: "dashboard", icon: "account_circle" },
-    { name: "Employees", routerlink: "employeeslist", icon: "menu" }
+    { name: "Login", routerlink: "login", icon: "fingerprint" },
+    { name: "Dashboard", routerlink: "dashboard", icon: "dashboard" },
+    { name: "Employees", routerlink: "employeeslist", icon: "face" }
   ];
 
   ngOnInit(): void {}
