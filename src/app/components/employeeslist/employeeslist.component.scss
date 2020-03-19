@@ -1,9 +1,31 @@
 :host {
   height: 100%;
   display: grid;
-  place-items: center center;
-  overflow-y: auto;
+  place-items: stretch stretch;
+  overflow-y: hidden;
+  padding: 30px;
 }
 .container {
-  padding: 20px;
+  display: grid;
+  grid-template-rows: min-content auto;
+  width: 100%;
+  overflow-y: hidden;
+  padding-bottom: 60px;
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .tablecontent {
+    overflow-y: auto;
+
+    table {
+      width: 100%;
+      td,
+      th {
+        width: 25%;
+      }
+    }
+  }
 }

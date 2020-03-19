@@ -56,8 +56,7 @@ export class FirebaseauthService {
     const data = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
+      displayName: user.displayName
     };
 
     return userRef.set(data, { merge: true });

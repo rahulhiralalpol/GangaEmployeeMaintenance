@@ -1,4 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+
+export interface Employee {
+  id: string;
+  name: string;
+  department: string;
+}
 
 @Component({
   selector: "app-employeeslist",
@@ -6,39 +15,129 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./employeeslist.component.scss"]
 })
 export class EmployeeslistComponent implements OnInit {
-  constructor() {}
+  displayedColumns: string[] = ["id", "name", "department"];
+  dataSource: MatTableDataSource<Employee>;
 
-  employees: any[] = [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30
-  ];
-  ngOnInit(): void {}
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  constructor() {
+    const employees: Employee[] = [
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" },
+      { id: "1", name: "Rahul Pol", department: "Mahima" },
+      { id: "2", name: "Parul Pol", department: "Mahima" },
+      { id: "3", name: "Maitri Pol", department: "Mahima" },
+      { id: "4", name: "Kaveesh Pol", department: "Mahima" },
+      { id: "5", name: "Champak Pol", department: "Venus" },
+      { id: "6", name: "Sarika Pol", department: "Venus" },
+      { id: "7", name: "Aditi Pol", department: "Venus" },
+      { id: "8", name: "Chandrika Pol", department: "Shraddha" },
+      { id: "9", name: "Kumudini Shinde", department: "Shraddha" },
+      { id: "10", name: "Khushal Shinde", department: "Shraddha" }
+    ];
+    this.dataSource = new MatTableDataSource(employees);
+  }
+
+  ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

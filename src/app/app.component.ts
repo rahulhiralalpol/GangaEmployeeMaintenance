@@ -14,7 +14,7 @@ export class AppComponent {
     this.renderer.setAttribute(this.document.body, "class", this.MyThemeClass);
   }
 
-  sidebarOpen = true;
+  sidebarOpen = false;
   MyThemeClass = "GangaLightTheme1";
 
   themeChanger(ChangedTheme) {
