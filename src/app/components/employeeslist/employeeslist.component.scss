@@ -17,15 +17,39 @@
     width: 100%;
   }
 
-  .tablecontent {
-    overflow-y: auto;
+  .tablestructure {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto min-content;
+    overflow-y: hidden;
 
-    table {
-      width: 100%;
-      td,
-      th {
-        width: 25%;
+    .tablecontent {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto;
+      overflow-y: auto;
+      background-color: rgba($color: #000000, $alpha: 0.05);
+
+      table {
+        width: 100%;
+        td,
+        th {
+          padding: 0px;
+          // width: 25%;
+        }
+        .mat-header-row {
+          // background-color: rgba($color: #224446, $alpha: 0.15);
+        }
+        .mat-row:nth-child(even) {
+          background-color: rgba($color: #000000, $alpha: 0.08);
+        }
+        .headerdecor {
+          width: 100%;
+        }
       }
+    }
+    mat-paginator {
+      // position: relative;
     }
   }
 }
