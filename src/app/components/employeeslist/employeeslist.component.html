@@ -9,9 +9,7 @@
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- ID Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            <mat-toolbar class="headerdecor" color="accent">Id</mat-toolbar>
-          </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
           <td mat-cell *matCellDef="let row">{{ row.id }}</td>
         </ng-container>
 
@@ -25,6 +23,42 @@
         <ng-container matColumnDef="department">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
           <td mat-cell *matCellDef="let row">{{ row.department }}</td>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+          <td mat-cell *matCellDef="let row">{{ row.city }}</td>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+          <td mat-cell *matCellDef="let row">{{ row.state }}</td>
+        </ng-container>
+
+        <!-- Country Column -->
+        <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+          <td mat-cell *matCellDef="let row">{{ row.country }}</td>
+        </ng-container>
+
+        <!-- PIN Column -->
+        <ng-container matColumnDef="pin">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>PIN</th>
+          <td mat-cell *matCellDef="let row">{{ row.pin }}</td>
+        </ng-container>
+
+        <!-- Col1 Column -->
+        <ng-container matColumnDef="col1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Temp 1</th>
+          <td mat-cell *matCellDef="let row">{{ row.col1 }}</td>
+        </ng-container>
+
+        <!-- Col2 Column -->
+        <ng-container matColumnDef="col2">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Temp 2</th>
+          <td mat-cell *matCellDef="let row">{{ row.col2 }}</td>
         </ng-container>
 
         <tr
