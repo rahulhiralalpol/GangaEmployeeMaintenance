@@ -5,6 +5,12 @@
   overflow-y: hidden;
   padding: 30px;
 }
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   display: grid;
   grid-template-rows: min-content auto;
@@ -33,6 +39,14 @@
         td,
         th {
           padding: 0 10px 0 10px;
+        }
+        th.mat-header-cell,
+        td.mat-cell {
+          text-align: center;
+        }
+        .mat-header-cell {
+          // background-color: rgb(159, 182, 113);
+          font-size: 1.1em;
         }
         .mat-row:nth-child(even) {
           background-color: rgba($color: #000000, $alpha: 0.08);
