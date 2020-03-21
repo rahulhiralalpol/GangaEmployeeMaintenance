@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-login",
@@ -9,6 +10,12 @@ export class LoginComponent implements OnInit {
   constructor() {}
 
   registermode = false;
+
+  loginForm = new FormGroup({
+    email: new FormControl(),
+    password: new FormControl(),
+    confpassword: new FormControl()
+  });
 
   ngOnInit(): void {}
 
@@ -25,13 +32,14 @@ export class LoginComponent implements OnInit {
         "New User ? ..... Click here to Register.....";
       document.getElementById("StateIcon").innerText = "vpn_key";
     }
+    this.loginForm.reset();
   }
 
-  DoProcess() {
+  onSubmit(loginData) {
     if (this.registermode) {
-      console.log("Do Registration");
+      console.log(loginData.email.value);
     } else {
-      console.log("Do Login");
+      console.log(loginData.email.value);
     }
   }
 }
