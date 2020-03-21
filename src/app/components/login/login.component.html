@@ -1,7 +1,7 @@
 <mat-card class="login-card mat-elevation-z5">
   <mat-card-header>
     <mat-toolbar color="primary" class="loginicon mat-elevation-z8">
-      <mat-icon>vpn_key</mat-icon>
+      <mat-icon id="StateIcon">vpn_key</mat-icon>
     </mat-toolbar>
   </mat-card-header>
   <mat-card-content>
@@ -12,9 +12,23 @@
       <mat-form-field class="full-width">
         <input matInput placeholder="Password" type="password" />
       </mat-form-field>
+      <mat-form-field class="full-width" *ngIf="registermode">
+        <input matInput placeholder="Confirm Password" type="password" />
+      </mat-form-field>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button color="primary" mat-raised-button>LOGIN</button>
+    <button
+      id="LoginButton"
+      color="primary"
+      mat-raised-button
+      (click)="DoProcess()"
+      type="submit"
+    >
+      L O G I N
+    </button>
+    <a id="StateButton" mat-button (click)="ChangeState()"
+      >New User ? ..... Click here to Register.....</a
+    >
   </mat-card-actions>
 </mat-card>
