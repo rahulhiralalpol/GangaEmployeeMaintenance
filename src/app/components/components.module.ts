@@ -8,9 +8,15 @@ import { LoginComponent } from "./login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TextFieldModule } from "@angular/cdk/text-field";
 import { AngmaterialModule } from "../ang-material.module";
+import { PasswordstrengthindicatorComponent } from "./passwordstrengthindicator/passwordstrengthindicator.component";
 
 @NgModule({
-  declarations: [DashboardComponent, EmployeeslistComponent, LoginComponent],
+  declarations: [
+    DashboardComponent,
+    EmployeeslistComponent,
+    LoginComponent,
+    PasswordstrengthindicatorComponent
+  ],
   imports: [
     CommonModule,
     AngmaterialModule,
@@ -18,6 +24,11 @@ import { AngmaterialModule } from "../ang-material.module";
     ReactiveFormsModule,
     TextFieldModule
   ],
-  exports: [DashboardComponent, EmployeeslistComponent, LoginComponent]
+  exports: [
+    DashboardComponent,
+    EmployeeslistComponent,
+    LoginComponent,
+    PasswordstrengthindicatorComponent
+  ]
 })
 export class ComponentsModule {}

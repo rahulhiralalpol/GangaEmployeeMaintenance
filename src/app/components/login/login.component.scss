@@ -50,6 +50,11 @@
       display: grid;
       grid-template-rows: auto min-content;
 
+      mat-icon {
+        font-size: 1.1em;
+        color: #615d5d;
+      }
+
       .submitbuttons {
         display: grid;
         grid-template-rows: auto;
