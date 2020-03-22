@@ -3,67 +3,64 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument
-} from "@angular/fire/firestore";
-
-import { Observable, of } from "rxjs";
-import { switchMap } from "rxjs/operators";
-
-export interface User {
-  uid: string;
-  email: string;
-  displayName?: string;
-}
+import { User } from "firebase";
 
 @Injectable({
   providedIn: "root"
 })
 export class FirebaseauthService {
-  user$: Observable<User>;
+  user: User;
 
-  constructor(
-    private router: Router,
-    private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore
-  ) {
-    this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        // Logged in
-        if (user) {
-          return this.afStore.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          // Logged out
-          return of(null);
-        }
-      })
+  constructor(public afAuth: AngularFireAuth, public router: Router) {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.user = user;
+        localStorage.setItem("user", JSON.stringify(this.user));
+      } else {
+        localStorage.setItem("user", null);
+      }
+    });
+  }
+
+  async login(email: string, password: string) {
+    const result = await this.afAuth.auth.signInWithEmailAndPassword(
+      email,
+      password
     );
+    this.router.navigate(["/dashboard"]);
+    console.log(result);
   }
 
-  async googleSignin() {
-    const provider = new auth.GoogleAuthProvider();
-    const credential = await this.afAuth.auth.signInWithPopup(provider);
-    return this.updateUserData(credential.user);
-  }
-
-  private updateUserData(user) {
-    // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<User> = this.afStore.doc(
-      `users/${user.uid}`
+  async register(email: string, password: string) {
+    const result = await this.afAuth.auth.createUserWithEmailAndPassword(
+      email,
+      password
     );
-
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName
-    };
-
-    return userRef.set(data, { merge: true });
+    this.sendEmailVerification();
   }
 
-  async signOut() {
+  async sendEmailVerification() {
+    await this.afAuth.auth.currentUser.sendEmailVerification();
+    this.router.navigate(["/dashboard"]);
+  }
+
+  async sendPasswordResetEmail(passwordResetEmail: string) {
+    return await this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail);
+  }
+
+  async logout() {
     await this.afAuth.auth.signOut();
-    this.router.navigate(["/"]);
+    localStorage.removeItem("user");
+    this.router.navigate(["/login"]);
+  }
+
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user !== null;
+  }
+
+  async loginWithGoogle() {
+    await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.router.navigate(["/dashboard"]);
   }
 }

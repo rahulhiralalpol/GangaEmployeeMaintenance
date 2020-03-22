@@ -62,13 +62,13 @@ export class PasswordstrengthindicatorComponent implements OnInit, OnChanges {
   isLengthMet() {
     if (this.password.length >= this.minLength) {
       this.feedbackArr.push({
-        label: `Minimum ${this.minLength} characters`,
+        label: `Minimum ${this.minLength} Characters`,
         status: true
       });
       return true;
     } else {
       this.feedbackArr.push({
-        label: `Minimum ${this.minLength} characters`,
+        label: `Minimum ${this.minLength} Characters`,
         status: false
       });
       return false;
@@ -110,7 +110,7 @@ export class PasswordstrengthindicatorComponent implements OnInit, OnChanges {
   isLowerCaseMet() {
     if (/[a-z]/.test(this.password)) {
       this.feedbackArr.push({
-        label: "One Lowercase character",
+        label: "One Lowercase Character",
         status: true
       });
       return true;

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ValidatePassword } from "../../custom_validators/validate-passwords";
+import { FirebaseauthService } from "../../services/firebaseauth.service";
 
 @Component({
   selector: "app-login",
@@ -9,7 +10,11 @@ import { ValidatePassword } from "../../custom_validators/validate-passwords";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: FirebaseauthService
+  ) {
     this.checkMode();
   }
 
@@ -31,9 +36,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.registermode) {
-      this.router.navigate(["/employeeslist"]);
+      const email = this.loginForm.controls.email.value;
+      const password = this.loginForm.controls.password.value;
+      this.authService.register(email, password);
+      // this.router.navigate(["/employeeslist"]);
     } else {
-      this.router.navigate(["/dashboard"]);
+      const email = this.loginForm.controls.email.value;
+      const password = this.loginForm.controls.password.value;
+      this.authService.login(email, password);
+      // this.router.navigate(["/dashboard"]);
     }
   }
 
