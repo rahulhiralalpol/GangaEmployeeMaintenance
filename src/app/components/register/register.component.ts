@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: FirebaseauthService
+    private firebaseauthservice: FirebaseauthService
   ) {}
 
   hide = true;
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
-    this.authService.register(email, password);
+    this.firebaseauthservice.register(email, password);
   }
 
   getEmailErrorMessage() {
@@ -66,14 +66,6 @@ export class RegisterComponent implements OnInit {
     return this.loginForm.controls.email.hasError("pattern")
       ? "Not a valid email"
       : "";
-  }
-
-  getPasswordErrorMessage() {
-    if (this.loginForm.controls.password.hasError("required")) {
-      return "You must enter a value";
-    } else {
-      return "";
-    }
   }
 
   getConfPasswordErrorMessage() {

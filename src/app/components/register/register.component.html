@@ -38,9 +38,6 @@
           <mat-hint align="end" aria-live="polite">
             {{ loginForm.controls.password.value.length }} / 15
           </mat-hint>
-          <mat-error *ngIf="loginForm.controls.password.invalid">{{
-            getPasswordErrorMessage()
-          }}</mat-error>
         </mat-form-field>
 
         <!-- Password Strength Meter -->

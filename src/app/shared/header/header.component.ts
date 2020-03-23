@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FirebaseauthService } from "../../services/firebaseauth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -9,6 +11,8 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidebarEvent: EventEmitter<any> = new EventEmitter();
   @Output() themeChangedEvent: EventEmitter<string> = new EventEmitter();
   SelectedThemeIndicator = "GangaLightTheme1";
+
+  isLoggedIn;
 
   themes: any[] = [
     {
@@ -29,7 +33,14 @@ export class HeaderComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private firebaseauthservice: FirebaseauthService
+  ) {
+    this.firebaseauthservice.loggedStatus.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -40,5 +51,11 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.toggleSidebarEvent.emit();
+  }
+
+  Logout() {
+    this.firebaseauthservice.logout();
+    this.firebaseauthservice.loggedStatus.next(false);
+    this.router.navigate(["/login"]);
   }
 }

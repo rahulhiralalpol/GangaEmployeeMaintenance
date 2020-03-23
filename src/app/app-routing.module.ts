@@ -5,14 +5,23 @@ import { EmployeeslistComponent } from "./components/employeeslist/employeeslist
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { ForgotpasswordComponent } from "./components/forgotpassword/forgotpassword.component";
+import { FireauthGuard } from "./fireauth.guard";
 
 const routes: Routes = [
-  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "forgotpassword", component: ForgotpasswordComponent },
-  { path: "dashboard", component: DashboardComponent },
-  { path: "employeeslist", component: EmployeeslistComponent }
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+    canActivate: [FireauthGuard]
+  },
+  {
+    path: "employeeslist",
+    component: EmployeeslistComponent,
+    canActivate: [FireauthGuard]
+  }
 ];
 
 @NgModule({

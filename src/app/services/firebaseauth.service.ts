@@ -5,11 +5,15 @@ import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from "firebase";
 
+import { Subject } from "rxjs";
+
 @Injectable({
   providedIn: "root"
 })
 export class FirebaseauthService {
   user: User;
+
+  loggedStatus = new Subject<any>();
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {
     this.afAuth.authState.subscribe(user => {
@@ -27,8 +31,7 @@ export class FirebaseauthService {
       email,
       password
     );
-    this.router.navigate(["/dashboard"]);
-    console.log(result);
+    return result;
   }
 
   async register(email: string, password: string) {
@@ -36,12 +39,11 @@ export class FirebaseauthService {
       email,
       password
     );
-    this.sendEmailVerification();
+    return result;
   }
 
   async sendEmailVerification() {
     await this.afAuth.auth.currentUser.sendEmailVerification();
-    this.router.navigate(["/dashboard"]);
   }
 
   async sendPasswordResetEmail(passwordResetEmail: string) {
@@ -51,7 +53,6 @@ export class FirebaseauthService {
   async logout() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem("user");
-    this.router.navigate(["/login"]);
   }
 
   get isLoggedIn(): boolean {

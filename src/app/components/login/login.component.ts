@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
+import { FirebasedataService } from "../../services/firebasedata.service";
 
 @Component({
   selector: "app-login",
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: FirebaseauthService
+    private firebaseauthservice: FirebaseauthService,
+    private firebasedataService: FirebasedataService
   ) {}
 
   hide = true;
@@ -39,13 +41,29 @@ export class LoginComponent implements OnInit {
   }
 
   ForgotPassword() {
-    this.router.navigate(["/forgotpassword"]);
+    // this.dataService.AddNewEmployee({
+    //   FirstName: "Parul",
+    //   MiddleName: "Rahul",
+    //   LastName: "Pol",
+    //   Department: "Stitching"
+    // });
+    // this.router.navigate(["/forgotpassword"]);
   }
 
   onSubmit() {
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
-    this.authService.login(email, password);
+    this.firebaseauthservice
+      .login(email, password)
+      .then(result => {
+        this.firebaseauthservice.loggedStatus.next(true);
+        setTimeout(() => {
+          this.router.navigate(["/dashboard"]);
+        }, 50);
+      })
+      .catch(e => {
+        this.firebaseauthservice.loggedStatus.next(false);
+      });
   }
 
   getEmailErrorMessage() {
