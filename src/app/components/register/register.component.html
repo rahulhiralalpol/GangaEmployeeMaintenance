@@ -1,7 +1,7 @@
 <mat-card class="login-card mat-elevation-z5">
   <mat-card-header>
     <mat-toolbar color="primary" class="loginicon mat-elevation-z8">
-      <mat-icon>vpn_key</mat-icon>
+      <mat-icon>{{ "edit" }}</mat-icon>
     </mat-toolbar>
   </mat-card-header>
   <mat-card-content>
@@ -9,7 +9,7 @@
       <div class="formfields">
         <!-- Email Field -->
         <mat-form-field class="full-width">
-          <mat-label>Registered Email</mat-label>
+          <mat-label>Email</mat-label>
           <input
             id="email"
             matInput
@@ -30,12 +30,35 @@
             placeholder="Password"
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
+            maxlength="15"
           />
           <mat-icon matSuffix (click)="hide = !hide">{{
             hide ? "visibility_off" : "visibility"
           }}</mat-icon>
+          <mat-hint align="end" aria-live="polite">
+            {{ loginForm.controls.password.value.length }} / 15
+          </mat-hint>
           <mat-error *ngIf="loginForm.controls.password.invalid">{{
             getPasswordErrorMessage()
+          }}</mat-error>
+        </mat-form-field>
+
+        <!-- Password Strength Meter -->
+        <app-passwordstrengthindicator
+          [password]="loginForm.controls.password.value"
+        ></app-passwordstrengthindicator>
+
+        <!-- Confirm Password Field -->
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Confirm Password"
+            type="password"
+            formControlName="confpassword"
+          />
+          <mat-icon matSuffix>visibility_off</mat-icon>
+          <mat-error *ngIf="loginForm.controls.confpassword.invalid">{{
+            getConfPasswordErrorMessage()
           }}</mat-error>
         </mat-form-field>
       </div>
@@ -47,17 +70,11 @@
           color="primary"
           mat-raised-button
         >
-          L O G I N
+          R E G I S T E R
         </button>
-        <div class="secondarybuttons">
-          <a mat-button (click)="ForgotPassword()">
-            Forgot Password?
-          </a>
-          <span class="spacer"></span>
-          <a id="StateButton" mat-button (click)="ChangeState()">
-            New User ? ... Register...
-          </a>
-        </div>
+        <a id="StateButton" mat-button (click)="ChangeState()">
+          Already a User ? ..... Click here to Login.....
+        </a>
       </div>
     </form>
   </mat-card-content>
