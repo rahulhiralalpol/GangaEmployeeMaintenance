@@ -24,7 +24,10 @@ export class FireauthGuard
     private router: Router
   ) {}
 
-  canActivate(): boolean {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean {
     if (this.firebaseauthservice.isLoggedIn) {
       return true;
     } else {
@@ -32,14 +35,6 @@ export class FireauthGuard
       return false;
     }
   }
-
-  // canActivate(
-  //   next: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot
-  // ):
-  //   | Observable<boolean | UrlTree>
-  //   | Promise<boolean | UrlTree>
-  //   | boolean
   //   | UrlTree {
   //   return true;
   // }

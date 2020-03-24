@@ -51,11 +51,32 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.toggleSidebarEvent.emit();
+    console.log(this.getCurrentUser());
   }
 
   Logout() {
     this.firebaseauthservice.logout();
     this.firebaseauthservice.loggedStatus.next(false);
     this.router.navigate(["/login"]);
+  }
+
+  showDisplayName() {
+    if (this.isLoggedIn) {
+      const user = this.getCurrentUser();
+      if (user.displayName == null) {
+        return user.email;
+      } else {
+        return user.displayName;
+      }
+    }
+  }
+  showEmail() {
+    if (this.isLoggedIn) {
+      const user = this.getCurrentUser();
+      return user.email;
+    }
+  }
+  getCurrentUser() {
+    return this.firebaseauthservice.getLoggedUser();
   }
 }

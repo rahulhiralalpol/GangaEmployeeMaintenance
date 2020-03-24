@@ -9,8 +9,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TextFieldModule } from "@angular/cdk/text-field";
 import { AngmaterialModule } from "../ang-material.module";
 import { PasswordstrengthindicatorComponent } from "./passwordstrengthindicator/passwordstrengthindicator.component";
-import { RegisterComponent } from './register/register.component';
-import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { RegisterComponent } from "./register/register.component";
+import { ForgotpasswordComponent } from "./forgotpassword/forgotpassword.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +32,9 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     DashboardComponent,
     EmployeeslistComponent,
     LoginComponent,
-    PasswordstrengthindicatorComponent
+    PasswordstrengthindicatorComponent,
+    RegisterComponent,
+    ForgotpasswordComponent
   ]
 })
 export class ComponentsModule {}

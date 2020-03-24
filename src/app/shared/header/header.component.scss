@@ -12,6 +12,38 @@ mat-toolbar {
     flex: 1 1 auto;
   }
 }
+::ng-deep .cdk-overlay-pane .userdetails {
+  .userdetailcard {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 10px 10px;
+    place-items: center center;
+
+    .user-image {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+    }
+    .user-name {
+      padding: 15px 0 0 0;
+      margin: 0px;
+      font-size: 1.25em;
+    }
+    .user-email {
+      padding: 5px 0 10px 0;
+      margin: 0px;
+      font-size: 0.8em;
+    }
+    .manageuser {
+    }
+    .logout {
+      mat-icon {
+        padding-right: 15px;
+      }
+      margin-top: 15px;
+    }
+  }
+}
 
 .activeTheme {
   background-color: rgba($color: #000000, $alpha: 0.15);

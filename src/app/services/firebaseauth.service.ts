@@ -13,6 +13,7 @@ import { Subject } from "rxjs";
 export class FirebaseauthService {
   user: User;
 
+  loggedUser = new Subject<any>();
   loggedStatus = new Subject<any>();
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {
@@ -58,6 +59,10 @@ export class FirebaseauthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
     return user !== null;
+  }
+
+  getLoggedUser() {
+    return JSON.parse(localStorage.getItem("user"));
   }
 
   async loginWithGoogle() {

@@ -40,15 +40,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(["/register"]);
   }
 
-  ForgotPassword() {
-    // this.dataService.AddNewEmployee({
-    //   FirstName: "Parul",
-    //   MiddleName: "Rahul",
-    //   LastName: "Pol",
-    //   Department: "Stitching"
-    // });
-    // this.router.navigate(["/forgotpassword"]);
-  }
+  ForgotPassword() {}
 
   onSubmit() {
     const email = this.loginForm.controls.email.value;
