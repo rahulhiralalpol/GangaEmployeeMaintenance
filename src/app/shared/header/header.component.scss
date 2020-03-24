@@ -16,7 +16,7 @@ mat-toolbar {
   .userdetailcard {
     display: flex;
     flex-direction: column;
-    padding: 20px 10px 10px 10px;
+    padding: 15px 0px 10px 0px;
     place-items: center center;
 
     .user-image {
@@ -24,23 +24,47 @@ mat-toolbar {
       height: 85px;
       border-radius: 50%;
     }
-    .user-name {
-      padding: 15px 0 0 0;
-      margin: 0px;
-      font-size: 1.25em;
-    }
-    .user-email {
-      padding: 5px 0 10px 0;
-      margin: 0px;
-      font-size: 0.8em;
-    }
-    .manageuser {
-    }
-    .logout {
-      mat-icon {
-        padding-right: 15px;
+    mat-list {
+      display: grid;
+      grid-auto-rows: min-content;
+      .nameemail {
+        display: grid;
+        grid-auto-rows: min-content;
+        .user-name {
+          padding: 10px 25px 0 25px;
+          margin: 0px;
+          font-size: 1.25em;
+          text-align: center;
+        }
+        .user-email {
+          padding: 5px 25px 10px 25px;
+          margin: 0px;
+          font-size: 0.85em;
+          text-align: center;
+        }
       }
-      margin-top: 15px;
+      .mat-list-item-content {
+        margin: 0;
+        padding: 0;
+      }
+      .manageuser {
+        width: 100%;
+        text-align: center;
+      }
+      .logout {
+        display: grid;
+        grid-template-rows: auto;
+        place-items: center center;
+
+        button {
+          border-radius: 20px;
+        }
+
+        mat-icon {
+          padding-right: 10px;
+        }
+        margin-top: 15px;
+      }
     }
   }
 }

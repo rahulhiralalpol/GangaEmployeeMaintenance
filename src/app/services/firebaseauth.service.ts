@@ -13,7 +13,6 @@ import { Subject } from "rxjs";
 export class FirebaseauthService {
   user: User;
 
-  loggedUser = new Subject<any>();
   loggedStatus = new Subject<any>();
 
   constructor(public afAuth: AngularFireAuth, public router: Router) {

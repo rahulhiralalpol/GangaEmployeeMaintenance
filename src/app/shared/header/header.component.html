@@ -24,7 +24,7 @@
 
   <!-- Theming Menu -->
   <mat-menu class="theming" #menu="matMenu">
-    <mat-nav-list mat-list-item *ngFor="let theme of themes">
+    <mat-nav-list mat-list-item *ngFor="let theme of themes" dense>
       <h4 matSubheader>{{ theme.ThemeGroup }}</h4>
       <button
         *ngFor="let detail of theme.Details"
@@ -46,26 +46,26 @@
   <!-- User Menu -->
   <mat-menu class="userdetails" #user="matMenu">
     <div class="userdetailcard">
-      <img
-        class="user-image"
-        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-      />
-      <p class="user-name">{{ showDisplayName() }}</p>
-      <p class="user-email">{{ showEmail() }}</p>
-      <mat-divider></mat-divider>
-      <button mat-menu-item class="manageuser">
-        Manage your Account Details
-      </button>
-      <mat-divider></mat-divider>
-      <button
-        mat-raised-button
-        color="primary"
-        class="logout"
-        (click)="Logout()"
-      >
-        <mat-icon>logout</mat-icon>
-        L O G O U T
-      </button>
+      <img id="userimage" class="user-image" src="{{ displayImage() }}" />
+      <mat-list>
+        <mat-list-item role="listitem" class="nameemail">
+          <div mat-line class="user-name">{{ showDisplayName() }}</div>
+          <div mat-line class="user-email">{{ showEmail() }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <button mat-menu-item class="manageuser">
+            Manage your Account Details
+          </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div class="logout">
+          <button mat-raised-button color="primary" (click)="Logout()">
+            <mat-icon>logout</mat-icon>
+            L O G O U T
+          </button>
+        </div>
+      </mat-list>
     </div>
   </mat-menu>
 </mat-toolbar>
