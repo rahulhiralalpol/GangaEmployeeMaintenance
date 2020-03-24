@@ -79,11 +79,13 @@ export class HeaderComponent implements OnInit {
     return this.firebaseauthservice.getLoggedUser();
   }
   displayImage() {
-    const user = this.getCurrentUser();
-    if (user.photoURL == null) {
-      return "https://material.angular.io/assets/img/examples/shiba2.jpg";
-    } else {
-      return user.photoURL;
+    if (this.isLoggedIn) {
+      const user = this.getCurrentUser();
+      if (user.photoURL == null) {
+        return "https://material.angular.io/assets/img/examples/shiba2.jpg";
+      } else {
+        return user.photoURL;
+      }
     }
   }
 }
