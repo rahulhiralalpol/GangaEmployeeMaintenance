@@ -47,8 +47,8 @@
   <button
     mat-icon-button
     [matMenuTriggerFor]="user"
-    *ngIf="isLoggedIn"
     matTooltip="User Details"
+    *ngIf="firebaseauthservice.afAuth.auth.currentUser != null"
   >
     <mat-icon>face</mat-icon>
   </button>

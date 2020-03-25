@@ -1,45 +1,73 @@
 import { Injectable } from "@angular/core";
-
 import { Router } from "@angular/router";
+
 import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { User } from "firebase";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument
+} from "@angular/fire/firestore";
 
+import { Observable, of } from "rxjs";
+import { switchMap } from "rxjs/operators";
 import { Subject } from "rxjs";
+import { tap, map, take } from "rxjs/operators";
+
+import { FireUser } from "./fire-user";
 
 @Injectable({
   providedIn: "root"
 })
 export class FirebaseauthService {
-  user: User;
+  // user: FireUser;
+  user$: Observable<FireUser>;
 
-  loggedStatus = new Subject<any>();
+  constructor(
+    public afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    public router: Router
+  ) {
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          // Logged in
+          return this.afs.doc<FireUser>(`users/${user.uid}`).valueChanges();
+        } else {
+          // Logged out
+          return of(null);
+        }
+      })
+    );
+  }
 
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user;
-        localStorage.setItem("user", JSON.stringify(this.user));
-      } else {
-        localStorage.setItem("user", null);
-      }
-    });
+  private updateUserData(user) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<FireUser> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    };
+    return userRef.set(data, { merge: true });
   }
 
   async login(email: string, password: string) {
-    const result = await this.afAuth.auth.signInWithEmailAndPassword(
+    const credential = await this.afAuth.auth.signInWithEmailAndPassword(
       email,
       password
     );
-    return result;
+    return credential;
   }
 
   async register(email: string, password: string) {
-    const result = await this.afAuth.auth.createUserWithEmailAndPassword(
+    const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
       email,
       password
     );
-    return result;
+    return this.updateUserData(credential.user);
   }
 
   async sendEmailVerification() {
@@ -52,20 +80,9 @@ export class FirebaseauthService {
 
   async logout() {
     await this.afAuth.auth.signOut();
-    localStorage.removeItem("user");
-  }
-
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user !== null;
-  }
-
-  getLoggedUser() {
-    return JSON.parse(localStorage.getItem("user"));
   }
 
   async loginWithGoogle() {
     await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-    this.router.navigate(["/dashboard"]);
   }
 }

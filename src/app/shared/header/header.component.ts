@@ -12,8 +12,6 @@ export class HeaderComponent implements OnInit {
   @Output() themeChangedEvent: EventEmitter<string> = new EventEmitter();
   SelectedThemeIndicator = "GangaLightTheme1";
 
-  isLoggedIn;
-
   themes: any[] = [
     {
       ThemeGroup: "Light Themes",
@@ -35,56 +33,50 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private firebaseauthservice: FirebaseauthService
-  ) {
-    this.firebaseauthservice.loggedStatus.subscribe(status => {
-      this.isLoggedIn = status;
-    });
-  }
+    public firebaseauthservice: FirebaseauthService
+  ) {}
 
   ngOnInit(): void {}
+
+  toggleSidebar() {
+    this.toggleSidebarEvent.emit();
+  }
 
   ChangeTheme(selectedTheme) {
     this.themeChangedEvent.emit(selectedTheme);
     this.SelectedThemeIndicator = selectedTheme;
   }
 
-  toggleSidebar() {
-    this.toggleSidebarEvent.emit();
-  }
-
   Logout() {
     this.firebaseauthservice.logout();
-    this.firebaseauthservice.loggedStatus.next(false);
     this.router.navigate(["/login"]);
   }
 
   showDisplayName() {
-    if (this.isLoggedIn) {
-      const user = this.getCurrentUser();
-      if (user.displayName == null) {
-        return user.email;
+    const currentUser = this.firebaseauthservice.afAuth.auth.currentUser;
+    if (currentUser != null) {
+      if (currentUser.displayName == null) {
+        return currentUser.email;
       } else {
-        return user.displayName;
+        return currentUser.displayName;
       }
     }
   }
+
   showEmail() {
-    if (this.isLoggedIn) {
-      const user = this.getCurrentUser();
-      return user.email;
+    const currentUser = this.firebaseauthservice.afAuth.auth.currentUser;
+    if (currentUser != null) {
+      return currentUser.email;
     }
   }
-  getCurrentUser() {
-    return this.firebaseauthservice.getLoggedUser();
-  }
+
   displayImage() {
-    if (this.isLoggedIn) {
-      const user = this.getCurrentUser();
-      if (user.photoURL == null) {
+    const currentUser = this.firebaseauthservice.afAuth.auth.currentUser;
+    if (currentUser != null) {
+      if (currentUser.photoURL == null) {
         return "https://material.angular.io/assets/img/examples/shiba2.jpg";
       } else {
-        return user.photoURL;
+        return currentUser.photoURL;
       }
     }
   }

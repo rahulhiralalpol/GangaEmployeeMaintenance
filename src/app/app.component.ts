@@ -14,12 +14,9 @@ export class AppComponent implements OnInit {
     private firebaseauthservice: FirebaseauthService
   ) {
     this.renderer.setAttribute(this.document.body, "class", this.MyThemeClass);
-    this.firebaseauthservice.loggedStatus.subscribe(status => {
-      this.sidebarOpen = status;
-    });
   }
 
-  sidebarOpen = false;
+  sidebarOpen = true;
 
   MyThemeClass = "GangaLightTheme1";
 
@@ -29,16 +26,8 @@ export class AppComponent implements OnInit {
   }
 
   sidebarToggler($event) {
-    if (this.firebaseauthservice.isLoggedIn) {
-      this.sidebarOpen = !this.sidebarOpen;
-    }
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
-  ngOnInit(): void {
-    if (this.firebaseauthservice.isLoggedIn) {
-      this.firebaseauthservice.loggedStatus.next(true);
-    } else {
-      this.firebaseauthservice.loggedStatus.next(false);
-    }
-  }
+  ngOnInit(): void {}
 }

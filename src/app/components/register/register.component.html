@@ -7,6 +7,20 @@
   <mat-card-content>
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="formfields">
+        <!-- Display Name -->
+        <mat-form-field class="full-width">
+          <mat-label>Display Name</mat-label>
+          <input
+            id="displayname"
+            matInput
+            placeholder="Display Name"
+            formControlName="displayname"
+          />
+          <mat-error *ngIf="loginForm.controls.email.invalid">{{
+            getDisplayNameMessage()
+          }}</mat-error>
+        </mat-form-field>
+
         <!-- Email Field -->
         <mat-form-field class="full-width">
           <mat-label>Email</mat-label>

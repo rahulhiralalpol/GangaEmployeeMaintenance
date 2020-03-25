@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
-import { FirebasedataService } from "../../services/firebasedata.service";
 
 import { MatSnackBar } from "@angular/material/snack-bar";
 
@@ -16,7 +15,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private firebaseauthservice: FirebaseauthService,
-    private firebasedataService: FirebasedataService,
     private snack: MatSnackBar
   ) {}
 
@@ -51,15 +49,11 @@ export class LoginComponent implements OnInit {
     this.firebaseauthservice
       .login(email, password)
       .then(result => {
-        this.firebaseauthservice.loggedStatus.next(true);
-        setTimeout(() => {
-          this.router.navigate(["/dashboard"]);
-        }, 50);
+        this.router.navigate(["/dashboard"]);
         this.openSnackBar("Logged in Successfully");
       })
       .catch(e => {
-        this.firebaseauthservice.loggedStatus.next(false);
-        this.openSnackBar("Login Failed");
+        this.openSnackBar("Login Failed : " && e.message);
       });
   }
 
@@ -71,7 +65,6 @@ export class LoginComponent implements OnInit {
       ? "Not a valid email"
       : "";
   }
-
   getPasswordErrorMessage() {
     if (this.loginForm.controls.password.hasError("required")) {
       return "You must enter a value";
@@ -79,10 +72,9 @@ export class LoginComponent implements OnInit {
       return "";
     }
   }
-
   openSnackBar(message: string, action?: string) {
     this.snack.open(message, action, {
-      duration: 2000
+      duration: 3000
     });
   }
 }

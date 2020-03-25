@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { ValidatePassword } from "../../custom_validators/validate-passwords";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 
+import { MatSnackBar } from "@angular/material/snack-bar";
+
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
@@ -13,12 +15,17 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private firebaseauthservice: FirebaseauthService
+    private firebaseauthservice: FirebaseauthService,
+    private snack: MatSnackBar
   ) {}
 
   hide = true;
   loginForm = this.fb.group(
     {
+      displayname: new FormControl("", {
+        validators: [Validators.required],
+        updateOn: "change"
+      }),
       email: new FormControl("", {
         validators: [
           Validators.required,
@@ -56,9 +63,24 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
-    this.firebaseauthservice.register(email, password);
+    this.firebaseauthservice
+      .register(email, password)
+      .then(result => {
+        this.router.navigate(["/dashboard"]);
+        this.openSnackBar("Registered and Logged in Successfully");
+      })
+      .catch(e => {
+        this.openSnackBar("Registration Failed : " && e.message);
+      });
   }
 
+  getDisplayNameMessage() {
+    if (this.loginForm.controls.email.hasError("required")) {
+      return "You must enter a value";
+    } else {
+      return "";
+    }
+  }
   getEmailErrorMessage() {
     if (this.loginForm.controls.email.hasError("required")) {
       return "You must enter a value";
@@ -67,7 +89,6 @@ export class RegisterComponent implements OnInit {
       ? "Not a valid email"
       : "";
   }
-
   getConfPasswordErrorMessage() {
     if (this.loginForm.controls.confpassword.hasError("required")) {
       return "You must enter a value";
@@ -78,5 +99,10 @@ export class RegisterComponent implements OnInit {
     } else {
       return "";
     }
+  }
+  openSnackBar(message: string, action?: string) {
+    this.snack.open(message, action, {
+      duration: 3000
+    });
   }
 }
