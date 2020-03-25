@@ -10,8 +10,6 @@ import {
 
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { Subject } from "rxjs";
-import { tap, map, take } from "rxjs/operators";
 
 import { FireUser } from "./fire-user";
 
@@ -40,7 +38,7 @@ export class FirebaseauthService {
     );
   }
 
-  private updateUserData(user) {
+  public updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<FireUser> = this.afs.doc(
       `users/${user.uid}`

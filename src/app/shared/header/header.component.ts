@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
+import { GeneralService } from "../../services/general.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -33,7 +34,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public firebaseauthservice: FirebaseauthService
+    public firebaseauthservice: FirebaseauthService,
+    private generalservice: GeneralService
   ) {}
 
   ngOnInit(): void {}
@@ -50,6 +52,7 @@ export class HeaderComponent implements OnInit {
   Logout() {
     this.firebaseauthservice.logout();
     this.router.navigate(["/login"]);
+    this.generalservice.openSnackBar("Logged Out successfully....");
   }
 
   showDisplayName() {
@@ -74,7 +77,7 @@ export class HeaderComponent implements OnInit {
     const currentUser = this.firebaseauthservice.afAuth.auth.currentUser;
     if (currentUser != null) {
       if (currentUser.photoURL == null) {
-        return "https://material.angular.io/assets/img/examples/shiba2.jpg";
+        return "assets/icons/usericon.png";
       } else {
         return currentUser.photoURL;
       }

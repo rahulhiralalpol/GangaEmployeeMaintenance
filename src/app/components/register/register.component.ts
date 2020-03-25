@@ -3,8 +3,7 @@ import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ValidatePassword } from "../../custom_validators/validate-passwords";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
-
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { GeneralService } from "src/app/services/general.service";
 
 @Component({
   selector: "app-register",
@@ -16,7 +15,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private firebaseauthservice: FirebaseauthService,
-    private snack: MatSnackBar
+    private generalservice: GeneralService
   ) {}
 
   hide = true;
@@ -61,16 +60,27 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    const displayname = this.loginForm.controls.displayname.value;
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
     this.firebaseauthservice
       .register(email, password)
       .then(result => {
+        this.firebaseauthservice.afAuth.auth.currentUser
+          .updateProfile({
+            displayName: displayname
+          })
+          .then(() => {
+            const user = this.firebaseauthservice.afAuth.auth.currentUser;
+            return this.firebaseauthservice.updateUserData(user);
+          });
         this.router.navigate(["/dashboard"]);
-        this.openSnackBar("Registered and Logged in Successfully");
+        this.generalservice.openSnackBar(
+          "Registered and Logged in Successfully"
+        );
       })
       .catch(e => {
-        this.openSnackBar("Registration Failed : " && e.message);
+        this.generalservice.openSnackBar("Registration Failed : " && e.message);
       });
   }
 
@@ -99,10 +109,5 @@ export class RegisterComponent implements OnInit {
     } else {
       return "";
     }
-  }
-  openSnackBar(message: string, action?: string) {
-    this.snack.open(message, action, {
-      duration: 3000
-    });
   }
 }

@@ -2,8 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
-
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { GeneralService } from "src/app/services/general.service";
 
 @Component({
   selector: "app-login",
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private firebaseauthservice: FirebaseauthService,
-    private snack: MatSnackBar
+    private generalservice: GeneralService
   ) {}
 
   hide = true;
@@ -50,10 +49,10 @@ export class LoginComponent implements OnInit {
       .login(email, password)
       .then(result => {
         this.router.navigate(["/dashboard"]);
-        this.openSnackBar("Logged in Successfully");
+        this.generalservice.openSnackBar("Logged in Successfully");
       })
       .catch(e => {
-        this.openSnackBar("Login Failed : " && e.message);
+        this.generalservice.openSnackBar("Login Failed : " && e.message);
       });
   }
 
@@ -71,10 +70,5 @@ export class LoginComponent implements OnInit {
     } else {
       return "";
     }
-  }
-  openSnackBar(message: string, action?: string) {
-    this.snack.open(message, action, {
-      duration: 3000
-    });
   }
 }

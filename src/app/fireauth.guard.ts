@@ -14,6 +14,7 @@ import {
 import { Observable } from "rxjs";
 import { FirebaseauthService } from "./services/firebaseauth.service";
 import { tap, map, take } from "rxjs/operators";
+import { GeneralService } from "./services/general.service";
 
 @Injectable({
   providedIn: "root"
@@ -22,7 +23,8 @@ export class FireauthGuard
   implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
   constructor(
     private firebaseauthservice: FirebaseauthService,
-    private router: Router
+    private router: Router,
+    private generalservice: GeneralService
   ) {}
 
   canActivate(
@@ -34,7 +36,7 @@ export class FireauthGuard
       map(user => !!user), // <-- map to boolean
       tap(loggedIn => {
         if (!loggedIn) {
-          console.log("access denied");
+          this.generalservice.openSnackBar("Please Login to continue.....");
           this.router.navigate(["/login"]);
         }
       })

@@ -16,6 +16,7 @@ import { FirebaseauthService } from "./services/firebaseauth.service";
 import { FirebasedataService } from "./services/firebasedata.service";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FireauthGuard } from "./fireauth.guard";
+import { GeneralService } from "./services/general.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,12 @@ import { FireauthGuard } from "./fireauth.guard";
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [FirebaseauthService, FirebasedataService, FireauthGuard],
+  providers: [
+    FirebaseauthService,
+    FirebasedataService,
+    FireauthGuard,
+    GeneralService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

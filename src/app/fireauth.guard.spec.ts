@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { FireauthGuard } from './fireauth.guard';
+import { FireauthGuard } from "./fireauth.guard";
 
-describe('FireauthGuard', () => {
+describe("FireauthGuard", () => {
   let guard: FireauthGuard;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('FireauthGuard', () => {
     guard = TestBed.inject(FireauthGuard);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(guard).toBeTruthy();
   });
 });
