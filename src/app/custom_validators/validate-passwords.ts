@@ -11,4 +11,17 @@ export class ValidatePassword {
       return null;
     }
   }
+  static OldNewEqualCheck(fc: AbstractControl) {
+    const oldPassword = fc.get("oldpassword").value;
+    const password = fc.get("password").value;
+    if (oldPassword !== "" && password !== "") {
+      if (password !== oldPassword) {
+        return null;
+      } else {
+        fc.get("password").setErrors({
+          oldnewmatch: true
+        });
+      }
+    }
+  }
 }

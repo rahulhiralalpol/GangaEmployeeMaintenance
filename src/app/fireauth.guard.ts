@@ -53,6 +53,7 @@ export class FireauthGuard
     | UrlTree {
     return true;
   }
+
   canDeactivate(
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,

@@ -48,7 +48,7 @@
     mat-icon-button
     [matMenuTriggerFor]="user"
     matTooltip="User Details"
-    *ngIf="firebaseauthservice.afAuth.auth.currentUser != null"
+    *ngIf="displayUser()"
   >
     <mat-icon>face</mat-icon>
   </button>
@@ -64,7 +64,7 @@
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>
-          <button mat-menu-item class="manageuser">
+          <button mat-menu-item class="manageuser" (click)="EditProfile()">
             Manage your Account Details
           </button>
         </mat-list-item>

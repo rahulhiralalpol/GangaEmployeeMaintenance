@@ -1,0 +1,74 @@
+:host {
+  height: 100%;
+  display: grid;
+  place-items: center center;
+  overflow-y: auto;
+}
+.profile-card {
+  width: 350px;
+  border-radius: 10px;
+  background-color: rgba($color: #000000, $alpha: 0.08);
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+
+  .header {
+    display: grid;
+    grid-template-columns: max-content auto;
+    place-items: center start;
+    column-gap: 20px;
+    background-color: rgba($color: #000000, $alpha: 0.12);
+    margin: -16px;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    .profile-image {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .profile-detail {
+      .user-name {
+        font-size: 1.25em;
+      }
+      .user-email {
+        font-size: 0.9em;
+      }
+    }
+  }
+  .content {
+    margin-top: 16px;
+    .user-tabs {
+      .basic {
+        .profile-form {
+          padding-top: 15px;
+        }
+      }
+      .passchange {
+        .password-form {
+          padding-top: 15px;
+          display: grid;
+
+          mat-icon {
+            font-size: 1.1em;
+            color: #615d5d;
+          }
+
+          .submitbuttons {
+            display: grid;
+            grid-template-rows: auto;
+            row-gap: 10px;
+            padding-top: 15px;
+            button {
+              border-radius: 13px;
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}

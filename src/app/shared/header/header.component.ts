@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  DoCheck
+} from "@angular/core";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 import { GeneralService } from "../../services/general.service";
 import { Router } from "@angular/router";
@@ -53,6 +59,19 @@ export class HeaderComponent implements OnInit {
     this.firebaseauthservice.logout();
     this.router.navigate(["/login"]);
     this.generalservice.openSnackBar("Logged Out successfully....");
+  }
+
+  EditProfile() {
+    this.router.navigate(["/profile"]);
+  }
+
+  displayUser() {
+    const currentUser = this.firebaseauthservice.afAuth.auth.currentUser;
+    if (currentUser != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   showDisplayName() {

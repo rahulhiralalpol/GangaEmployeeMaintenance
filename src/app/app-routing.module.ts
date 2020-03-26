@@ -6,12 +6,18 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { ForgotpasswordComponent } from "./components/forgotpassword/forgotpassword.component";
 import { FireauthGuard } from "./fireauth.guard";
+import { EditprofileComponent } from "./components/editprofile/editprofile.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "forgotpassword", component: ForgotpasswordComponent },
+  {
+    path: "profile",
+    component: EditprofileComponent,
+    canActivate: [FireauthGuard]
+  },
   {
     path: "dashboard",
     component: DashboardComponent,
