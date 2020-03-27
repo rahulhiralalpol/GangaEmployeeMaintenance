@@ -98,6 +98,16 @@ export class EditprofileComponent implements OnInit {
     );
   }
 
+  sendEmailVerificationMesage() {
+    if (!this.currentUser.emailVerified) {
+      this.firebaseauthservice.sendEmailVerification().then(() => {
+        this.generalservice.openSnackBar(
+          "Verification email sent... Please check your inbox..."
+        );
+      });
+    }
+  }
+
   onSubmit() {
     const email = this.firebaseauthservice.afAuth.auth.currentUser.email;
     const oldpassword = this.passwordForm.controls.oldpassword.value;

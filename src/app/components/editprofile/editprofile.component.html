@@ -10,6 +10,24 @@
       <div class="user-name">{{ currentUser.displayName }}</div>
       <div class="user-email">{{ currentUser.email }}</div>
     </div>
+    <div class="verification">
+      <button
+        mat-icon-button
+        [matTooltip]="
+          currentUser.emailVerified
+            ? 'Verified'
+            : 'Email Verification Pending... Click here for verification...'
+        "
+        (click)="sendEmailVerificationMesage()"
+      >
+        <mat-icon
+          [style.color]="
+            currentUser.emailVerified ? 'darkOliveGreen' : 'darkred'
+          "
+          >verified_user</mat-icon
+        >
+      </button>
+    </div>
   </div>
   <div class="content">
     <mat-tab-group
@@ -66,6 +84,7 @@
               color="primary"
               mat-raised-button
               class="full-width"
+              [disabled]="profileForm.pristine"
             >
               Update Profile
             </button>
