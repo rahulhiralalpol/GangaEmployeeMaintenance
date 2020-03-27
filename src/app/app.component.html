@@ -6,14 +6,24 @@
     ></app-header>
   </div>
   <div class="content">
-    <mat-drawer-container class="sidenav-container" autosize>
-      <mat-drawer #drawer class="sidenav" mode="side" [opened]="sidebarOpen">
+    <mat-sidenav-container
+      class="sidenav-container"
+      autosize
+      (backdropClick)="sidenavclose()"
+    >
+      <mat-sidenav
+        #sidenav
+        class="sidenav"
+        mode="side"
+        [opened]="sidebarOpen"
+        (keydown.escape)="sidenavclose()"
+      >
         <app-sidebar></app-sidebar>
-      </mat-drawer>
-      <mat-drawer-content class="sidenav-content">
+      </mat-sidenav>
+      <mat-sidenav-content class="sidenav-content">
         <router-outlet></router-outlet>
-      </mat-drawer-content>
-    </mat-drawer-container>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
   <div class="footer">
     <app-footer></app-footer>

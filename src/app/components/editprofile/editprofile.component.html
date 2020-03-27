@@ -12,29 +12,70 @@
     </div>
   </div>
   <div class="content">
-    <mat-tab-group mat-stretch-tabs class="user-tabs">
+    <mat-tab-group
+      mat-stretch-tabs
+      class="user-tabs"
+      (selectedTabChange)="tabChanged($event)"
+    >
+      <!-- Basic Detail Form -->
       <mat-tab label="Basic Details">
         <div class="basic">
           <form
             class="profile-form"
             [formGroup]="profileForm"
-            (ngSubmit)="onSubmit()"
+            (ngSubmit)="onChangeProfileDetails()"
           >
+            <!-- Display Name -->
             <mat-form-field class="full-width">
               <mat-label>Display Name</mat-label>
               <input
                 id="displayname"
                 matInput
                 placeholder="Display Name"
-                formControlName="displayname"
+                formControlName="displayName"
               />
             </mat-form-field>
+            <!-- Gender -->
+            <mat-form-field class="full-width">
+              <mat-label>Gender</mat-label>
+              <mat-select id="gender" placeholder="" formControlName="gender">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Birth Date -->
+            <mat-form-field class="full-width">
+              <mat-label>Date of Birth</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                id="dob"
+                placeholder=""
+                formControlName="dob"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              id="updateprofile"
+              color="primary"
+              mat-raised-button
+              class="full-width"
+            >
+              Update Profile
+            </button>
           </form>
         </div>
       </mat-tab>
+
+      <!-- Password Change Form -->
       <mat-tab label="Password">
         <div class="passchange">
-          <!-- Password Change Form -->
           <form
             class="password-form"
             [formGroup]="passwordForm"

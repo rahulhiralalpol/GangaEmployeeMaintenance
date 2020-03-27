@@ -4,6 +4,9 @@ import { Router } from "@angular/router";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 import { ValidatePassword } from "../../custom_validators/validate-passwords";
 import { GeneralService } from "src/app/services/general.service";
+import { auth } from "firebase/app";
+import { MatTabChangeEvent } from "@angular/material/tabs";
+import { FireUser } from "../../services/fire-user";
 
 @Component({
   selector: "app-editprofile",
@@ -18,6 +21,7 @@ export class EditprofileComponent implements OnInit {
     private generalservice: GeneralService
   ) {
     this.currentUser = this.firebaseauthservice.afAuth.auth.currentUser;
+    this.LoadProfileDetails();
   }
 
   hide = true;
@@ -25,8 +29,10 @@ export class EditprofileComponent implements OnInit {
   currentUser;
 
   profileForm = this.fb.group({
-    displayname: new FormControl(),
-    email: new FormControl()
+    displayName: new FormControl(""),
+    photoURL: new FormControl(""),
+    gender: new FormControl(""),
+    dob: new FormControl("")
   });
 
   passwordForm = this.fb.group(
@@ -59,12 +65,46 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  LoadProfileDetails() {
+    this.firebaseauthservice
+      .GetProfileDetails(this.currentUser.uid)
+      .then(doc => {
+        this.profileForm.controls.displayName.setValue(doc.data().displayName);
+        this.profileForm.controls.gender.setValue(doc.data().gender);
+        this.profileForm.controls.dob.setValue(doc.data().dob.toDate());
+      })
+      .catch(e => {
+        console.log(e.meesage);
+      });
+  }
+
+  onChangeProfileDetails() {
+    const user: FireUser = {
+      uid: this.currentUser.uid,
+      email: this.currentUser.email,
+      photoURL: this.profileForm.controls.photoURL.value,
+      displayName: this.profileForm.controls.displayName.value,
+      gender: this.profileForm.controls.gender.value,
+      dob: this.profileForm.controls.dob.value
+    };
+    const profile = {
+      photoURL: this.profileForm.controls.photoURL.value,
+      displayName: this.profileForm.controls.displayName.value
+    };
+    this.firebaseauthservice.updateUserData(user);
+    this.firebaseauthservice.afAuth.auth.currentUser.updateProfile(profile);
+    this.generalservice.openSnackBar(
+      "Profile details updated successfully...."
+    );
+  }
+
   onSubmit() {
     const email = this.firebaseauthservice.afAuth.auth.currentUser.email;
     const oldpassword = this.passwordForm.controls.oldpassword.value;
     const newpassword = this.passwordForm.controls.password.value;
-    this.firebaseauthservice
-      .login(email, oldpassword)
+    const credential = auth.EmailAuthProvider.credential(email, oldpassword);
+    this.firebaseauthservice.afAuth.auth.currentUser
+      .reauthenticateWithCredential(credential)
       .then(() => {
         this.firebaseauthservice.afAuth.auth.currentUser
           .updatePassword(newpassword)
@@ -123,4 +163,19 @@ export class EditprofileComponent implements OnInit {
       return "";
     }
   }
+
+  clearProfileForm() {
+    this.passwordForm.patchValue({
+      oldpassword: "",
+      password: "",
+      confpassword: ""
+    });
+    this.passwordForm.markAsUntouched();
+  }
+
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    if (tabChangeEvent.index == 1) {
+      this.clearProfileForm();
+    }
+  };
 }

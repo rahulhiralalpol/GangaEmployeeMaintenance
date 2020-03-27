@@ -3,4 +3,6 @@ export interface FireUser {
   email: string;
   photoURL?: string;
   displayName?: string;
+  gender?: string;
+  dob?: string;
 }

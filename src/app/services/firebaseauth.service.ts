@@ -47,9 +47,16 @@ export class FirebaseauthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
+      gender: user.gender,
+      dob: user.dob
     };
     return userRef.set(data, { merge: true });
+  }
+
+  async GetProfileDetails(uid) {
+    const doc = await this.afs.firestore.doc(`users/${uid}`).get();
+    return doc;
   }
 
   async login(email: string, password: string) {

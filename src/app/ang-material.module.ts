@@ -17,6 +17,9 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [],
@@ -37,7 +40,10 @@ import { MatTabsModule } from "@angular/material/tabs";
     MatSortModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatDividerModule,
@@ -55,7 +61,11 @@ import { MatTabsModule } from "@angular/material/tabs";
     MatSortModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatTabsModule
-  ]
+    MatTabsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [MatDatepickerModule]
 })
 export class AngmaterialModule {}
