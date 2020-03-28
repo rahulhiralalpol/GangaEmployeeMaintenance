@@ -1,4 +1,11 @@
-import { Component, Renderer2, Inject, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  Renderer2,
+  Inject,
+  OnInit,
+  ViewChild,
+  HostListener
+} from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { FirebaseauthService } from "./services/firebaseauth.service";
 import { MatSidenav } from "@angular/material/sidenav";
@@ -25,9 +32,11 @@ export class AppComponent implements OnInit {
   sidebarOpen = true;
   MyThemeClass = "GangaLightTheme1";
 
-  sidenavclose() {
-    this.sidenav.close();
-    this.sidebarOpen = !this.sidebarOpen;
+  @HostListener("window:keyup", ["$event"])
+  keyEvent(event: KeyboardEvent) {
+    if (event.code === "Escape") {
+      this.sidebarOpen = false;
+    }
   }
 
   themeChanger(ChangedTheme) {

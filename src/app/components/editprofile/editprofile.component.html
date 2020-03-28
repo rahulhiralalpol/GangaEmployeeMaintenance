@@ -5,6 +5,8 @@
       id="profileimage"
       class="profile-image"
       src="{{ displayImage() }}"
+      matTooltip="Update profile image..."
+      (click)="UpdateProfileImage()"
     />
     <div class="profile-detail">
       <div class="user-name">{{ currentUser.displayName }}</div>
@@ -15,7 +17,7 @@
         mat-icon-button
         [matTooltip]="
           currentUser.emailVerified
-            ? 'Verified'
+            ? 'Email Verified'
             : 'Email Verification Pending... Click here for verification...'
         "
         (click)="sendEmailVerificationMesage()"

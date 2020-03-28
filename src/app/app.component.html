@@ -6,18 +6,8 @@
     ></app-header>
   </div>
   <div class="content">
-    <mat-sidenav-container
-      class="sidenav-container"
-      autosize
-      (backdropClick)="sidenavclose()"
-    >
-      <mat-sidenav
-        #sidenav
-        class="sidenav"
-        mode="side"
-        [opened]="sidebarOpen"
-        (keydown.escape)="sidenavclose()"
-      >
+    <mat-sidenav-container class="sidenav-container" autosize>
+      <mat-sidenav #sidenav class="sidenav" mode="side" [opened]="sidebarOpen">
         <app-sidebar></app-sidebar>
       </mat-sidenav>
       <mat-sidenav-content class="sidenav-content">

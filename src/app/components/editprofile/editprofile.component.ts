@@ -1,21 +1,51 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 import { ValidatePassword } from "../../custom_validators/validate-passwords";
 import { GeneralService } from "src/app/services/general.service";
 import { auth } from "firebase/app";
 import { MatTabChangeEvent } from "@angular/material/tabs";
 import { FireUser } from "../../services/fire-user";
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS
+} from "@angular/material-moment-adapter";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE
+} from "@angular/material/core";
+
+import * as _moment from "moment";
+const moment = _moment;
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: "LL"
+  },
+  display: {
+    dateInput: "LL",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "LL",
+    monthYearA11yLabel: "MMMM YYYY"
+  }
+};
 
 @Component({
   selector: "app-editprofile",
   templateUrl: "./editprofile.component.html",
-  styleUrls: ["./editprofile.component.scss"]
+  styleUrls: ["./editprofile.component.scss"],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ]
 })
 export class EditprofileComponent implements OnInit {
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private firebaseauthservice: FirebaseauthService,
     private generalservice: GeneralService
@@ -27,12 +57,13 @@ export class EditprofileComponent implements OnInit {
   hide = true;
   hideoldpassword = true;
   currentUser;
+  moment = _moment;
 
   profileForm = this.fb.group({
     displayName: new FormControl(""),
     photoURL: new FormControl(""),
     gender: new FormControl(""),
-    dob: new FormControl("")
+    dob: new FormControl(moment())
   });
 
   passwordForm = this.fb.group(
@@ -101,9 +132,11 @@ export class EditprofileComponent implements OnInit {
   sendEmailVerificationMesage() {
     if (!this.currentUser.emailVerified) {
       this.firebaseauthservice.sendEmailVerification().then(() => {
-        this.generalservice.openSnackBar(
-          "Verification email sent... Please check your inbox..."
-        );
+        const data = {
+          name: this.currentUser.displayName,
+          message: `Verification Email sent to ${this.currentUser.email}. Please check your inbox and click on the verification link given in the email and login again.`
+        };
+        this.generalservice.openOKOnlyDialog(data);
       });
     }
   }
@@ -139,6 +172,14 @@ export class EditprofileComponent implements OnInit {
         return currentUser.photoURL;
       }
     }
+  }
+
+  // todo: update profile image
+  UpdateProfileImage() {
+    const result = this.generalservice.openFileDialog();
+    result.subscribe(filename => {
+      console.log(filename);
+    });
   }
 
   getOldPasswordErrorMessage() {

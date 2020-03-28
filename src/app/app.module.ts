@@ -17,6 +17,7 @@ import { FirebasedataService } from "./services/firebasedata.service";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { FireauthGuard } from "./fireauth.guard";
 import { GeneralService } from "./services/general.service";
+import { AngularFireStorage } from "@angular/fire/storage";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +36,8 @@ import { GeneralService } from "./services/general.service";
     FirebaseauthService,
     FirebasedataService,
     FireauthGuard,
-    GeneralService
+    GeneralService,
+    AngularFireStorage
   ],
   bootstrap: [AppComponent]
 })
