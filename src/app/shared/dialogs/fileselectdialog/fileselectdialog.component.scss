@@ -3,15 +3,17 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 350px;
+  height: auto;
+  max-height: 600px;
   border: 1px dashed #f16624;
   border-radius: 5px;
-  background: white;
+  background: rgba($color: #000000, $alpha: 0.06);
   margin: 5px 0;
+  padding: 10px 20px 10px 10px;
 
   &.hovering {
     border: 1px solid #f16624;
-    color: #8addbd !important;
+    background: rgba($color: #000000, $alpha: 0.12);
   }
 
   .filecontrols {
@@ -19,6 +21,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    .imagecropper {
+      image-cropper {
+        width: 200px;
+      }
+    }
   }
 
   img {
@@ -27,8 +35,4 @@
     max-width: 400px;
     max-height: 300px;
   }
-}
-
-progress::-webkit-progress-value {
-  transition: width 0.1s ease;
 }

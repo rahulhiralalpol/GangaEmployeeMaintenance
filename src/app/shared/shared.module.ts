@@ -10,7 +10,7 @@ import { PopupmodalokonlyComponent } from "./dialogs/popupmodalokonly/popupmodal
 import { FileselectdialogComponent } from "./dialogs/fileselectdialog/fileselectdialog.component";
 import { FormsModule } from "@angular/forms";
 import { DropzoneDirective } from "./dialogs/fileselectdialog/dropzone.directive";
-import { UploadtaskComponent } from "./dialogs/fileselectdialog/uploadtask/uploadtask.component";
+import { ImageCropperModule } from "ngx-image-cropper";
 
 @NgModule({
   declarations: [
@@ -20,10 +20,15 @@ import { UploadtaskComponent } from "./dialogs/fileselectdialog/uploadtask/uploa
     PopupmodalyesnoComponent,
     PopupmodalokonlyComponent,
     FileselectdialogComponent,
-    DropzoneDirective,
-    UploadtaskComponent
+    DropzoneDirective
   ],
-  imports: [CommonModule, RouterModule, AngmaterialModule, FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    AngmaterialModule,
+    FormsModule,
+    ImageCropperModule
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,
@@ -31,8 +36,7 @@ import { UploadtaskComponent } from "./dialogs/fileselectdialog/uploadtask/uploa
     PopupmodalyesnoComponent,
     PopupmodalokonlyComponent,
     FileselectdialogComponent,
-    DropzoneDirective,
-    UploadtaskComponent
+    DropzoneDirective
   ],
   entryComponents: [FileselectdialogComponent]
 })

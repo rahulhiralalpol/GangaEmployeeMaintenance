@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  DoCheck
-} from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 import { GeneralService } from "../../services/general.service";
 import { Router } from "@angular/router";

@@ -31,7 +31,7 @@ export class GeneralService {
 
   openFileDialog() {
     const dialogRef = this.dialog.open(FileselectdialogComponent, {
-      width: "450px"
+      width: "600px"
     });
     return dialogRef.afterClosed();
   }

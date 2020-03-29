@@ -110,7 +110,6 @@ export class FirebaseauthService {
         .getDownloadURL()
         .toPromise()
         .then(downloadURL => {
-          console.log(downloadURL);
           this.afAuth.auth.currentUser.updateProfile({ photoURL: downloadURL });
           const user = this.afAuth.auth.currentUser;
           const userRef: AngularFirestoreDocument<FireUser> = this.afs.doc(
