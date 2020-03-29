@@ -27,14 +27,14 @@
       />
     </p>
   </div>
-  <div class="imagecropper">
+  <div class="imagecropper" *ngIf="hasImage">
     <image-cropper
       [imageChangedEvent]="imageChangedEvent"
       [imageBase64]="droppedImage"
       [maintainAspectRatio]="true"
       [containWithinAspectRatio]="containWithinAspectRatio"
       [aspectRatio]="1 / 1"
-      [resizeToWidth]="200"
+      [resizeToWidth]="300"
       [cropperMinWidth]="128"
       [onlyScaleDown]="true"
       [roundCropper]="false"
