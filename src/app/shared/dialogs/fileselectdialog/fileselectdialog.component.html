@@ -5,12 +5,38 @@
   (dropped)="onDrop($event)"
   [class.hovering]="isHovering"
 >
-  <h3>AngularFire Drop Zone</h3>
-  <p>Drag and Drop a File</p>
+  <div class="filecontrols" *ngIf="!imgURL">
+    <p>Drag and Drop a File</p>
+    <p>--- or ---</p>
+    <p>
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="file.click()"
+      >
+        Choose File
+      </button>
+      <input
+        hidden
+        mat-button
+        #file
+        type="file"
+        accept="image/*"
+        (change)="preview(file.files)"
+      />
+    </p>
+  </div>
+  <img [src]="imgURL" height="300" *ngIf="imgURL" />
 </div>
-
-<h3>Uploads</h3>
-
-<div *ngFor="let file of files">
-  <app-uploadtask [file]="file"></app-uploadtask>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button
+    mat-button
+    [mat-dialog-close]=""
+    (click)="CropAndUploadFile()"
+    cdkFocusInitial
+  >
+    Ok
+  </button>
 </div>

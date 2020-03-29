@@ -174,12 +174,8 @@ export class EditprofileComponent implements OnInit {
     }
   }
 
-  // todo: update profile image
   UpdateProfileImage() {
-    const result = this.generalservice.openFileDialog();
-    result.subscribe(filename => {
-      console.log(filename);
-    });
+    this.generalservice.openFileDialog();
   }
 
   getOldPasswordErrorMessage() {

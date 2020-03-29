@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-popupmodalyesno',
-  templateUrl: './popupmodalyesno.component.html',
-  styleUrls: ['./popupmodalyesno.component.scss']
+  selector: "app-popupmodalyesno",
+  templateUrl: "./popupmodalyesno.component.html",
+  styleUrls: ["./popupmodalyesno.component.scss"]
 })
 export class PopupmodalyesnoComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

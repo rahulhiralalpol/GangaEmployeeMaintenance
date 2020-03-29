@@ -8,6 +8,11 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 
+import {
+  AngularFireStorage,
+  AngularFireUploadTask
+} from "@angular/fire/storage";
+
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
@@ -23,6 +28,7 @@ export class FirebaseauthService {
   constructor(
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private storage: AngularFireStorage,
     public router: Router
   ) {
     this.user$ = this.afAuth.authState.pipe(
@@ -89,5 +95,34 @@ export class FirebaseauthService {
 
   async loginWithGoogle() {
     await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  startUpload(file) {
+    // File Name equals User.uid
+    const photoid = this.afAuth.auth.currentUser.uid;
+    // The storage path with file name
+    const path = `profilephotos/${photoid}`;
+    // Reference to storage bucket
+    const ref = this.storage.ref(path);
+    // The main task
+    this.storage.upload(path, file).then(() => {
+      ref
+        .getDownloadURL()
+        .toPromise()
+        .then(downloadURL => {
+          console.log(downloadURL);
+          this.afAuth.auth.currentUser.updateProfile({ photoURL: downloadURL });
+          const user = this.afAuth.auth.currentUser;
+          const userRef: AngularFirestoreDocument<FireUser> = this.afs.doc(
+            `users/${user.uid}`
+          );
+          const data = {
+            uid: user.uid,
+            email: user.email,
+            photoURL: downloadURL
+          };
+          return userRef.set(data, { merge: true });
+        });
+    });
   }
 }
