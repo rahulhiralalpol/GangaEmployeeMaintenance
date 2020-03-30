@@ -61,28 +61,6 @@ export class FileselectdialogComponent implements OnInit {
       }
     }
   }
-  // onDrop(inputfiles: FileList) {
-  //   for (let i = 0; i < inputfiles.length; i++) {
-  //     this.files.push(inputfiles.item(i));
-  //   }
-  //   this.preview(inputfiles);
-  // }
-
-  // preview(inputfiles: FileList) {
-  //   if (inputfiles.length !== 0) {
-  //     for (let i = 0; i < inputfiles.length; i++) {
-  //       this.files.push(inputfiles.item(i));
-  //     }
-  //     const mimeType = this.files[0].type;
-  //     if (mimeType.match(/image\/*/) !== null) {
-  //       const reader = new FileReader();
-  //       reader.readAsDataURL(this.files[0]);
-  //       reader.onload = event => {
-  //         this.imgURL = reader.result;
-  //       };
-  //     }
-  //   }
-  // }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -103,5 +81,67 @@ export class FileselectdialogComponent implements OnInit {
 
   imageLoaded() {
     this.showCropper = true;
+  }
+
+  ZoomIn() {
+    this.scale += 0.1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  ZoomOut() {
+    this.scale -= 0.1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  ResetImage() {
+    this.scale = 1;
+    this.rotation = 0;
+    this.canvasRotation = 0;
+    this.transform = {};
+  }
+
+  RotateLeft() {
+    this.canvasRotation--;
+    this.flipAfterRotate();
+  }
+
+  RotateRight() {
+    this.canvasRotation++;
+    this.flipAfterRotate();
+  }
+
+  private flipAfterRotate() {
+    const flippedH = this.transform.flipH;
+    const flippedV = this.transform.flipV;
+    this.transform = {
+      ...this.transform,
+      flipH: flippedV,
+      flipV: flippedH
+    };
+  }
+
+  flipHorizontal() {
+    this.transform = {
+      ...this.transform,
+      flipH: !this.transform.flipH
+    };
+  }
+
+  flipVertical() {
+    this.transform = {
+      ...this.transform,
+      flipV: !this.transform.flipV
+    };
+  }
+
+  ClearImage() {
+    this.hasImage = false;
+    this.ResetImage();
   }
 }

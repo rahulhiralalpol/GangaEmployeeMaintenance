@@ -46,6 +46,26 @@
       (imageCropped)="imageCropped($event)"
       (imageLoaded)="imageLoaded()"
     ></image-cropper>
+    <div class="imagebuttons">
+      <button mat-icon-button matTooltip="Zoom In" (click)="ZoomIn()">
+        <mat-icon>zoom_in</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Zoom Out" (click)="ZoomOut()">
+        <mat-icon>zoom_out</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Reset Image" (click)="ResetImage()">
+        <mat-icon>crop_din</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Rotate Left" (click)="RotateLeft()">
+        <mat-icon>rotate_left</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Rotate Right" (click)="RotateRight()">
+        <mat-icon>rotate_right</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Clear Image" (click)="ClearImage()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </div>
 </div>
 <div mat-dialog-actions>
@@ -54,8 +74,9 @@
     mat-button
     [mat-dialog-close]=""
     (click)="CropAndUploadFile()"
-    cdkFocusInitial
+    [disabled]="!hasImage"
   >
     Ok
   </button>
 </div>
+<!-- cdkFocusInitial -->

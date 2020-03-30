@@ -10,7 +10,6 @@
   background: rgba($color: #000000, $alpha: 0.06);
   // margin: 5px 0;
   padding: 10px 20px 10px 10px;
-  overflow: scroll;
 
   &.hovering {
     border: 1px solid #f16624;
@@ -30,9 +29,13 @@
     justify-content: center;
     flex-direction: column;
     max-height: 590px;
+
     image-cropper {
       padding: 0;
       margin: 0;
+    }
+    .imagebuttons {
+      padding-top: 15px;
     }
   }
 }
