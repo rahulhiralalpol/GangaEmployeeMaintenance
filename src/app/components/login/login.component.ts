@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         this.generalservice.openSnackBar("Logged in Successfully");
       })
       .catch(e => {
+        this.spinnerservice.stopSpinner();
         this.generalservice.openSnackBar("Login Failed : " && e.message);
       });
   }

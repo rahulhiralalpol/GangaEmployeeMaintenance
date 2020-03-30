@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit {
         );
       })
       .catch(e => {
-        console.log(e);
+        this.spinnerservice.stopSpinner();
         this.generalservice.openSnackBar("Registration Failed : " && e.message);
       });
   }
