@@ -65,14 +65,22 @@ export class RegisterComponent implements OnInit {
     const password = this.loginForm.controls.password.value;
     this.firebaseauthservice
       .register(email, password)
-      .then(result => {
+      .then(() => {
         this.firebaseauthservice.afAuth.auth.currentUser
           .updateProfile({
             displayName: displayname
           })
           .then(() => {
             const user = this.firebaseauthservice.afAuth.auth.currentUser;
-            return this.firebaseauthservice.updateUserData(user);
+            const data = {
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+              gender: null,
+              dob: null
+            };
+            return this.firebaseauthservice.updateUserData(data);
           });
         this.router.navigate(["/dashboard"]);
         this.generalservice.openSnackBar(
@@ -80,6 +88,7 @@ export class RegisterComponent implements OnInit {
         );
       })
       .catch(e => {
+        console.log(e);
         this.generalservice.openSnackBar("Registration Failed : " && e.message);
       });
   }

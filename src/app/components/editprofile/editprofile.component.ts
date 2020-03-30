@@ -102,7 +102,7 @@ export class EditprofileComponent implements OnInit {
       .then(doc => {
         this.profileForm.controls.displayName.setValue(doc.data().displayName);
         this.profileForm.controls.gender.setValue(doc.data().gender);
-        this.profileForm.controls.dob.setValue(doc.data().dob.toDate());
+        this.profileForm.controls.dob.setValue(doc.data().dob);
       })
       .catch(e => {
         console.log(e.meesage);
@@ -113,17 +113,16 @@ export class EditprofileComponent implements OnInit {
     const user: FireUser = {
       uid: this.currentUser.uid,
       email: this.currentUser.email,
-      photoURL: this.profileForm.controls.photoURL.value,
+      photoURL: this.currentUser.photoURL,
       displayName: this.profileForm.controls.displayName.value,
       gender: this.profileForm.controls.gender.value,
-      dob: this.profileForm.controls.dob.value
+      dob: moment.utc(this.profileForm.controls.dob.value).format()
     };
     const profile = {
-      photoURL: this.profileForm.controls.photoURL.value,
       displayName: this.profileForm.controls.displayName.value
     };
-    this.firebaseauthservice.updateUserData(user);
     this.firebaseauthservice.afAuth.auth.currentUser.updateProfile(profile);
+    this.firebaseauthservice.updateUserData(user);
     this.generalservice.openSnackBar(
       "Profile details updated successfully...."
     );

@@ -17,6 +17,7 @@ import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
 import { FireUser } from "./fire-user";
+import { getMatIconNameNotFoundError } from "@angular/material/icon";
 
 @Injectable({
   providedIn: "root"
@@ -45,18 +46,30 @@ export class FirebaseauthService {
   }
 
   public updateUserData(user) {
-    // Sets user data to firestore on login
+    // Sets user data to firestore on registration
     const userRef: AngularFirestoreDocument<FireUser> = this.afs.doc(
       `users/${user.uid}`
     );
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      gender: user.gender,
-      dob: user.dob
-    };
+    let data;
+    if (user.gender === undefined && user.dob === undefined) {
+      data = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        gender: null,
+        dob: null
+      };
+    } else {
+      data = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        gender: user.gender,
+        dob: user.dob
+      };
+    }
     return userRef.set(data, { merge: true });
   }
 
