@@ -104,3 +104,8 @@ body {
   margin: auto;
   text-align: center;
 }
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.dark-backdrop {
+  background: #000;
+  opacity: 0.5 !important;
+}

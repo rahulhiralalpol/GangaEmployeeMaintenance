@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { ValidatePassword } from "../../custom_validators/validate-passwords";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 import { GeneralService } from "src/app/services/general.service";
+import { MatspinnerService } from "src/app/services/matspinner.service";
 
 @Component({
   selector: "app-register",
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private firebaseauthservice: FirebaseauthService,
-    private generalservice: GeneralService
+    private generalservice: GeneralService,
+    private spinnerservice: MatspinnerService
   ) {}
 
   hide = true;
@@ -60,6 +62,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinnerservice.showSpinner();
     const displayname = this.loginForm.controls.displayname.value;
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
@@ -82,6 +85,7 @@ export class RegisterComponent implements OnInit {
             };
             return this.firebaseauthservice.updateUserData(data);
           });
+        this.spinnerservice.stopSpinner();
         this.router.navigate(["/dashboard"]);
         this.generalservice.openSnackBar(
           "Registered and Logged in Successfully"

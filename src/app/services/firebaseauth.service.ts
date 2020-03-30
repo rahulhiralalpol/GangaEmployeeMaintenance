@@ -8,16 +8,13 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 
-import {
-  AngularFireStorage,
-  AngularFireUploadTask
-} from "@angular/fire/storage";
+import { AngularFireStorage } from "@angular/fire/storage";
 
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
 import { FireUser } from "./fire-user";
-import { getMatIconNameNotFoundError } from "@angular/material/icon";
+import { MatspinnerService } from "./matspinner.service";
 
 @Injectable({
   providedIn: "root"
@@ -30,7 +27,8 @@ export class FirebaseauthService {
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
-    public router: Router
+    public router: Router,
+    private spinnerservice: MatspinnerService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -111,6 +109,7 @@ export class FirebaseauthService {
   }
 
   startUpload(file) {
+    this.spinnerservice.showSpinner();
     // File Name equals User.uid
     const photoid = this.afAuth.auth.currentUser.uid;
     // The storage path with file name
@@ -135,6 +134,7 @@ export class FirebaseauthService {
           };
           return userRef.set(data, { merge: true });
         });
+      this.spinnerservice.stopSpinner();
     });
   }
 }

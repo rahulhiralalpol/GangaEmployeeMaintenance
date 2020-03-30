@@ -12,32 +12,40 @@ import { PasswordstrengthindicatorComponent } from "./passwordstrengthindicator/
 import { RegisterComponent } from "./register/register.component";
 import { ForgotpasswordComponent } from "./forgotpassword/forgotpassword.component";
 import { EditprofileComponent } from "./editprofile/editprofile.component";
+import { DashboardnewComponent } from "./dashboardnew/dashboardnew.component";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatCardModule } from "@angular/material/card";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { LayoutModule } from "@angular/cdk/layout";
+
+const modulelist = [
+  DashboardComponent,
+  EmployeeslistComponent,
+  LoginComponent,
+  PasswordstrengthindicatorComponent,
+  RegisterComponent,
+  ForgotpasswordComponent,
+  EditprofileComponent,
+  DashboardnewComponent
+];
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    EmployeeslistComponent,
-    LoginComponent,
-    PasswordstrengthindicatorComponent,
-    RegisterComponent,
-    ForgotpasswordComponent,
-    EditprofileComponent
-  ],
+  declarations: [modulelist],
   imports: [
     CommonModule,
     AngmaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    TextFieldModule
+    TextFieldModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule
   ],
-  exports: [
-    DashboardComponent,
-    EmployeeslistComponent,
-    LoginComponent,
-    PasswordstrengthindicatorComponent,
-    RegisterComponent,
-    ForgotpasswordComponent,
-    EditprofileComponent
-  ]
+  exports: [modulelist]
 })
 export class ComponentsModule {}

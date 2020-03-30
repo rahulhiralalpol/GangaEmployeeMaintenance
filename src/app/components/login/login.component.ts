@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { FirebaseauthService } from "../../services/firebaseauth.service";
 import { GeneralService } from "src/app/services/general.service";
+import { MatspinnerService } from "src/app/services/matspinner.service";
 
 @Component({
   selector: "app-login",
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private firebaseauthservice: FirebaseauthService,
-    private generalservice: GeneralService
+    private generalservice: GeneralService,
+    private spinnerservice: MatspinnerService
   ) {}
 
   hide = true;
@@ -43,12 +45,14 @@ export class LoginComponent implements OnInit {
   ForgotPassword() {}
 
   onSubmit() {
+    this.spinnerservice.showSpinner();
     const email = this.loginForm.controls.email.value;
     const password = this.loginForm.controls.password.value;
     this.firebaseauthservice
       .login(email, password)
       .then(result => {
         this.router.navigate(["/dashboard"]);
+        this.spinnerservice.stopSpinner();
         this.generalservice.openSnackBar("Logged in Successfully");
       })
       .catch(e => {
