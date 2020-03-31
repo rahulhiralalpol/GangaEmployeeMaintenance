@@ -11,8 +11,16 @@ import { DashboardnewComponent } from "./components/dashboardnew/dashboardnew.co
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
+  {
+    path: "login",
+    component: LoginComponent,
+    data: { animation: "RegisterPage" }
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
+    data: { animation: "LoginPage" }
+  },
   { path: "forgotpassword", component: ForgotpasswordComponent },
   {
     path: "profile",

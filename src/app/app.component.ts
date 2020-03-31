@@ -9,11 +9,14 @@ import {
 import { DOCUMENT } from "@angular/common";
 import { FirebaseauthService } from "./services/firebaseauth.service";
 import { MatSidenav } from "@angular/material/sidenav";
+import { RouterOutlet } from "@angular/router";
+import { slideInAnimation } from "./animations";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  styleUrls: ["./app.component.scss"],
+  animations: [slideInAnimation]
 })
 export class AppComponent implements OnInit {
   @ViewChild("sidenav") sidenav: MatSidenav;
@@ -46,6 +49,12 @@ export class AppComponent implements OnInit {
 
   sidebarToggler($event) {
     this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return (
+      outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation
+    );
   }
 
   ngOnInit(): void {}
