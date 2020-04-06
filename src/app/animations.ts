@@ -1,4 +1,5 @@
 import {
+  animation,
   trigger,
   transition,
   style,
@@ -45,4 +46,13 @@ export const slideInAnimation = trigger("routeAnimations", [
     ]),
     query(":enter", animateChild())
   ])
+]);
+
+export const transAnimation = animation([
+  style({
+    height: "{{ height }}",
+    opacity: "{{ opacity }}",
+    backgroundColor: "{{ backgroundColor }}"
+  }),
+  animate("{{ time }}")
 ]);

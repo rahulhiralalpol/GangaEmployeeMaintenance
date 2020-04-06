@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
-    data: { animation: "RegisterPage" }
+    data: { animation: "LoginPage" }
   },
   {
     path: "register",
     component: RegisterComponent,
-    data: { animation: "LoginPage" }
+    data: { animation: "RegisterPage" }
   },
   { path: "forgotpassword", component: ForgotpasswordComponent },
   {
