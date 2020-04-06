@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
     this.router.navigate(["/register"]);
   }
 
-  ForgotPassword() {}
+  ForgotPassword() {
+    console.log("This task is Pending");
+  }
 
   onSubmit() {
     this.spinnerservice.showSpinner();
