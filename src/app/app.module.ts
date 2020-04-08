@@ -19,6 +19,11 @@ import { FireauthGuard } from "./fireauth.guard";
 import { GeneralService } from "./services/general.service";
 import { AngularFireStorage } from "@angular/fire/storage";
 
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/storage";
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
