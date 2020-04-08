@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { environment } from "../environments/environment";
+import { environment } from "../environments/environment.prod";
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -30,15 +30,15 @@ import { AngularFireStorage } from "@angular/fire/storage";
     AngmaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   providers: [
     FirebaseauthService,
     FirebasedataService,
     FireauthGuard,
     GeneralService,
-    AngularFireStorage
+    AngularFireStorage,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
